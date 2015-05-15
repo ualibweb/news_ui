@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--[if lte IE 6]>            <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en" ng-app="<%= pkg.name %>"> <![endif]-->
+<!--[if IEMobile 7]>          <html class="no-js iem7" lang="en" ng-app="<%= pkg.name %>"> <![endif]-->
+<!--[if (IE 7)&(!IEMobile)]>  <html class="no-js lt-ie9 lt-ie8" lang="en" ng-app="<%= pkg.name %>"> <![endif]-->
+<!--[if IE 8]>                <html class="no-js lt-ie9" lang="en" ng-app="<%= pkg.name %>"> <![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)]><!--> <html class="no-js" lang="en" ng-app="<%= pkg.name %>"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>UA Libraries Styleguide</title>
+
+    <meta name="description" content="">
+    <meta name="generator" content="kss-node">
+    <meta name="viewport" content="width=device-width">
+    
+    <link rel="stylesheet" id="roots_cdn-css" href="//fonts.googleapis.com/css?family=Ubuntu:300,400,500,700|Oxygen:300,400,700|Open+Sans:300,400,600,700|EB+Garamond|Lato:300,400,700" type="text/css" media="all">
+
+    <link rel="stylesheet" href="https://rawgit.com/ualibweb/roots-ualib/master/assets/css/main.css">
+    <link rel="stylesheet" href="<%= pkg.name %>.css">
+</head>
+<body>
+
+<div class="wrap container" role="document">
+    <div class="content row">
+        <main class="main" role="main">
+            <div ng-view></div>
+        </main>
+    </div>
+</div>
+
+<footer>
+
+</footer>
+
+<!-- bower:js -->
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/angular-route/angular-route.js"></script>
+<script src="../bower_components/angular-resource/angular-resource.js"></script>
+<script src="../bower_components/angular-animate/angular-animate.js"></script>
+<script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="../bower_components/angular-filter/dist/angular-filter.js"></script>
+<script src="../bower_components/angular-scroll/angular-scroll.js"></script>
+<script src="../bower_components/ualib-ui/dist/ualib-ui-templates.js"></script>
+<script src="../bower_components/ualib-ui/dist/ualib-ui.js"></script>
+<!-- endbower -->
+<script src="../dist/<%= pkg.name %>-templates.js"></script>
+<script src="../dist/<%= pkg.name %>.js"></script>
+</body>
+</html>

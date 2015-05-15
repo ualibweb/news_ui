@@ -1,0 +1,101 @@
+<!--<div class="page-header"><h1>News, Events, & Exhibits</h1></div>-->
+
+<div class="row">
+    <div class="col-md-3 col-md-push-9">
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control" ng-model="soft.search" placeholder="Search news, events, and exhibits" ng-change="update()">
+            </div>
+
+            <div class="form-group hidden-xs">
+                <h5>Categories</h5>
+                <div class="radio">
+                    <label>
+                        <input type="radio" value="" ng-model="soft.cat" ng-change="update()">
+                        All categories
+                    </label>
+                </div>
+                <div class="radio" ng-repeat="cat in news.categories">
+                    <label>
+                        <input type="radio" value="{{cat}}" ng-model="soft.cat" ng-change="update()">
+                        {{cat}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group hidden-xs">
+                <h5>Locations</h5>
+                <div class="radio">
+                    <label>
+                        <input type="radio" value="" ng-model="soft.loc" ng-change="update()" checked>
+                        All Locations
+                    </label>
+                </div>
+                <div class="radio" ng-repeat="loc in software.locations">
+                    <label>
+                        <input type="radio" value="{{loc.name}}" ng-model="soft.loc" ng-change="update()">
+                        {{loc.name}}
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-9 col-md-pull-3 software-list-container">
+        <div class="text-center">
+            <pagination total-items="filteredNews.length" ng-model="soft.page" max-size="10" class="pagination-sm" boundary-links="true" items-per-page="soft.perPage" ng-change="update()" ng-if="filteredNews.length > soft.perPage"></pagination>
+        </div>
+
+        <!--<div class="media" ng-repeat="item in filteredNew = (news.items | orderBy:activeFrom)">
+            <div class="media-body">
+                <h4 class="media-heading">
+                    {{item.title}}
+                </h4>
+                <div class="details-context">{{item.activeFrom | date:mediumDate}} - {{item.activeUntil | date:mediumDate}}</div>
+                <p>{{item.blurb}}</p>
+            </div>
+        </div>-->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="page-header"><h2>News</h2></div>
+                <div class="media" ng-repeat="item in news.news">
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            {{item.title}}
+                        </h4>
+                        <p>{{item.blurb}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="page-header"><h2>Exhibits</h2></div>
+                <div class="media" ng-repeat="item in news.exhibitions">
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            {{item.title}}
+                        </h4>
+                        <div class="details-context">{{item.activeFrom | date:mediumDate}} - {{item.activeUntil | date:mediumDate}}</div>
+                        <p>{{item.blurb}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="page-header"><h2>Events</h2></div>
+                <div class="media" ng-repeat="item in news.events">
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            {{item.title}}
+                        </h4>
+                        <div class="details-context">{{item.activeFrom | date:mediumDate}} - {{item.activeUntil | date:mediumDate}}</div>
+                        <p>{{item.blurb}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <pagination total-items="filteredNews.length" ng-model="soft.page" max-size="10" class="pagination-sm" boundary-links="true" items-per-page="soft.perPage" ng-change="update()" ng-if="filteredNews.length > soft.perPage"></pagination>
+        </div>
+    </div>
+</div>
