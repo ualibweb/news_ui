@@ -18,7 +18,7 @@ angular.module("news-item/event-card.tpl.html", []).run(["$templateCache", funct
 
 angular.module("news-item/news-card.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("news-item/news-card.tpl.html",
-    "<a ng-href=\"#/news-exhibits/{{item.link}}\" class=\"media news-card\">\n" +
+    "<a ng-href=\"#/news-exhibits/{{newsCard.link}}\" class=\"media news-card\">\n" +
     "    <div class=\"media-body\">\n" +
     "        <h4 class=\"media-heading\">\n" +
     "            <span ng-bind-html=\"newsCard.title\"></span>\n" +

@@ -534,38 +534,25 @@
     <div role="document">
         <div class="content container">
             <main class="main" role="main">
-            <div ng-view></div>
-           <!-- <div class="row" ng-controller="NewsTodayCtrl">
+           <!-- <div ng-view></div>-->
+            <div class="row" ng-controller="NewsTodayCtrl">
                 <div class="col-md-6">
                     <h2>News</h2>
-                    <a class="animate-repeat" ng-href="#/news-events-exhibits/{{item.link}}" news-card="item" ng-repeat="item in news">
+                    <a class="animate-repeat" news-card="item" ng-repeat="item in news">
                     </a>
                         <h2>Exhibits</h2>
-                        <a class="animate-repeat" ng-href="#/news-events-exhibits/{{item.link}}" news-card="item" ng-repeat="item in exhibitions">
+                        <a class="animate-repeat" news-card="item" ng-repeat="item in exhibitions">
                         </a>
                 </div>
                 <div class="col-md-6">
                     <div class="hours-list"></div>
                     <h2>Events</h2>
-                    <a class="animate-repeat" ng-href="{{item.link}}" news-card="item" news-type="event" ng-repeat="item in events">
+                    <a class="animate-repeat" news-card="item" news-type="event" ng-repeat="item in events">
                     </a>
-                </div>-->
+                </div>
 
-                <!--<div class="col-md-12" ng-if="newsOverflow">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h2><span class="fa fa-newspaper-o text-muted"></span> Exhibits</h2>
-                            <a news-card="item" ng-repeat="item in exhibitions">
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <h2><span class="fa fa-newspaper-o text-muted"></span> Events</h2>
-                            <a news-card="item" news-type="event" ng-repeat="item in events">
-                            </a>
-                        </div>
-                    </div>
-                </div>-->
 
+            </div>
 
             </main>
         </div>
