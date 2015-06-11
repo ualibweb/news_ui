@@ -1,36 +1,24 @@
-<div class="row">
-    <div class="col-md-6">
-        <div class="news-container" ng-if="news.totalNews">
-            <span class="fa fa-newspaper-o fa-3x"></span>
-            <a class="news-card" ng-repeat="item in news.news">
-                <h4>{{item.title}}</h4>
-                <p>{{item.blurb}}</p>
+<div class="row" ng-controller="NewsTodayCtrl">
+
+    <a news-card="item" ng-repeat="item in news">
+    </a>
+
+    <masonry>
+        <div class="masonry-brick">
+            <a news-card="item" ng-repeat="item in news">
             </a>
         </div>
-
-
-    </div>
-    <div class="col-md-6">
-
-    </div>
-    <div class="col-md-6">
-        <div class="events-container">
-            <h4>Events</h4>
-            <!--<span class="fa fa-calendar fa-3x"></span>-->
-            <a class="news-card" ng-repeat="event in news.events">
-                <h4>{{event.title}}</h4>
-                <p>{{event.blurb}}</p>
+        <div class="masonry-brick">
+            <a news-card="item" ng-repeat="item in exhibitions">
             </a>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="exhibits-container" ng-if="news.totalExhibitions">
-            <h4>Exhibits</h4>
-            <!--<span class="fa fa-eye fa-3x"></span>-->
-            <a class="news-card" ng-repeat="exhibit in news.exhibitions">
-                <h4>{{exhibit.title}}</h4>
-                <p>{{exhibit.blurb}}</p>
+        <div class="masonry-brick">
+            <a news-card="item" ng-repeat="item in events">
             </a>
         </div>
-    </div>
+        <div class="masonry-brick">
+            <div class="hours-list"></div>
+        </div>
+    </masonry>
+
 </div>

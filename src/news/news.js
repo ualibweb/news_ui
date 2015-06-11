@@ -2,38 +2,12 @@ angular.module('ualib.news')
 
     .config(['$routeProvider', function($routeProvider){
         $routeProvider
-            .when('/news-events-exhibits/', {
+            .when('/news-exhibits/', {
                 reloadOnSearch: false,
                 resolve: {
                     newsList: function(newsFactory){
-                        return newsFactory.get({news: 'all'})
-                            .$promise.then(function(data){
-                                return data;
-                           /* var news = [];
-                            var categories = [];
-                            var total = 0;
-                            angular.forEach(data, function(val, key){
-                                switch (key){
-                                    case 'totalNews':
-                                    case 'totalEvents':
-                                    case 'totalExhibitions':
-                                        total += data[key];
-                                        break;
-                                    case 'news':
-                                    case 'events':
-                                    case 'exhibitions':
-                                        val.category = key;
-                                        news = news.concat(val);
-                                        categories.push(key);
-                                        break;
-                                }
-                            });
-
-                            return {
-                                items: news,
-                                total: total,
-                                categories: categories
-                            };*/
+                        return newsFactory.get({news: 'all'}, function(data){
+                            return data;
                         }, function(data, status, headers, config) {
                             console.log('ERROR: news');
                             console.log({
@@ -50,16 +24,47 @@ angular.module('ualib.news')
             });
     }])
 
-    .controller('newsListCtrl', ['$scope', 'newsList', function($scope, newsList){
+    .controller('newsListCtrl', ['$scope', '$location', 'newsList', function($scope, $location, newsList){
+        var filterWatcher;
+        $scope.newsFilters = {
+            sort: 'activeFrom',
+            type: '',
+            search: ''
+        };
 
-        function getToday(){
-            var now = new Date();
-            var year = now.getYear();
-            var month = now.getMonth();
-            var date = now.getDate();
-            return Math.floor(Date.UTC(year, month, date, 0, 0, 0) / 1000);
+        newsList.$promise.then(function(data){
+            console.log(data);
+            $scope.news = data.news;
+            paramsToScope();
+            filterWatcher = $scope.$watch('newsFilters', function(newVal, oldVal){
+                processFilters();
+            }, true);
+        });
+
+
+        $scope.$on('$destroy', function(){
+            filterWatcher();
+        });
+
+        function paramsToScope(){
+            var params = $location.search();
+            for (var param in params){
+                if ($scope.newsFilters.hasOwnProperty(param)){
+                    $scope.newsFilters[param] = params[param];
+                }
+            }
         }
 
-        $scope.news = newsList;
-        $scope.today = getToday();
+        function processFilters(){
+            var f = $scope.newsFilters;
+            var params = $location.search();
+            for (var filter in f){
+                if (angular.isDefined(f[filter]) && f[filter] !== ''){
+                    $location.search(filter, f[filter]);
+                }
+                else if (params.hasOwnProperty(filter)){
+                    $location.search(filter, null);
+                }
+            }
+        }
     }]);

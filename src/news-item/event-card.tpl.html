@@ -1,0 +1,12 @@
+<a ng-href="{{newsCard.link}}" target="_new" class="media news-card">
+    <div class="media-left">
+        <div class="cal-icon">
+            <div class="cal-month">{{newsCard.activeFrom | date:'MMM'}}</div>
+            <div class="cal-day">{{newsCard.activeFrom | date:'d'}}</div>
+        </div>
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading" ng-bind-html="newsCard.title"></h4>
+        <p ng-bind-html="newsCard.blurb"></p>
+    </div>
+</a>
