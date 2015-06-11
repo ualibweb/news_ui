@@ -1,7 +1,7 @@
 angular.module('ualib.news')
 
-    .controller('NewsTodayCtrl', ['$scope', '$filter', 'newsFactory', function($scope, $filter, newsFactory){
-        newsFactory.today()
+    .controller('NewsTodayCtrl', ['$scope', '$filter', 'ualibNewsFactory', function($scope, $filter, ualibNewsFactory){
+        ualibNewsFactory.today()
             .$promise
             .then(function(data){
                 $scope.news = data.news;

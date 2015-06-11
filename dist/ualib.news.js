@@ -11,7 +11,7 @@ angular.module('ualib.news', [
     'ualib.news.templates'
 ]);;angular.module('ualib.news')
 
-    .factory('newsFactory', ['$resource', '$sce', '$filter', function($resource, $sce, $filter){
+    .factory('ualibNewsFactory', ['$resource', '$sce', '$filter', function($resource, $sce, $filter){
 
         function preprocessNews(news){
             news = $filter('unique')(news, 'title');
@@ -70,8 +70,8 @@ angular.module('ualib.news', [
             .when('/news-exhibits/:link', {
                 reloadOnSearch: false,
                 resolve: {
-                    newsItem: function(newsFactory){
-                        return newsFactory.get({news: 'all'}, function(data){
+                    newsItem: function(ualibNewsFactory){
+                        return ualibNewsFactory.get({news: 'all'}, function(data){
                             return data;
                         }, function(data, status, headers, config) {
                             console.log('ERROR: news item');
@@ -121,8 +121,8 @@ angular.module('ualib.news', [
             .when('/news-exhibits/', {
                 reloadOnSearch: false,
                 resolve: {
-                    newsList: function(newsFactory){
-                        return newsFactory.get({news: 'all'}, function(data){
+                    newsList: function(ualibNewsFactory){
+                        return ualibNewsFactory.get({news: 'all'}, function(data){
                             return data;
                         }, function(data, status, headers, config) {
                             console.log('ERROR: news');
@@ -185,8 +185,8 @@ angular.module('ualib.news', [
         }
     }]);;angular.module('ualib.news')
 
-    .controller('NewsTodayCtrl', ['$scope', '$filter', 'newsFactory', function($scope, $filter, newsFactory){
-        newsFactory.today()
+    .controller('NewsTodayCtrl', ['$scope', '$filter', 'ualibNewsFactory', function($scope, $filter, ualibNewsFactory){
+        ualibNewsFactory.today()
             .$promise
             .then(function(data){
                 $scope.news = data.news;

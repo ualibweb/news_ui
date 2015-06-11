@@ -5,8 +5,8 @@ angular.module('ualib.news')
             .when('/news-exhibits/', {
                 reloadOnSearch: false,
                 resolve: {
-                    newsList: function(newsFactory){
-                        return newsFactory.get({news: 'all'}, function(data){
+                    newsList: function(ualibNewsFactory){
+                        return ualibNewsFactory.get({news: 'all'}, function(data){
                             return data;
                         }, function(data, status, headers, config) {
                             console.log('ERROR: news');

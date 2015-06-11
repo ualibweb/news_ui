@@ -1,6 +1,6 @@
 angular.module('ualib.news')
 
-    .factory('newsFactory', ['$resource', '$sce', '$filter', function($resource, $sce, $filter){
+    .factory('ualibNewsFactory', ['$resource', '$sce', '$filter', function($resource, $sce, $filter){
 
         function preprocessNews(news){
             news = $filter('unique')(news, 'title');
