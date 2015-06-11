@@ -31,16 +31,18 @@ angular.module("news-item/news-card.tpl.html", []).run(["$templateCache", functi
 
 angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("news-item/news-item.tpl.html",
-    "<div class=\"row\">\n" +
+    "<div class=\"page-header\">\n" +
     "    <h1>{{newsItem.title}}</h1>\n" +
-    "    <div ng-class=\"{'col-md-8': newsItem.contactName, 'col-md-12': newsItem.contactName}\">\n" +
+    "</div>\n" +
+    "<div class=\"row\">\n" +
+    "    <div class=\"col-md-8\">\n" +
     "        <div class=\"text-muted\">\n" +
-    "            <span>Created by {{creator}} on {{newsItem.created}}</span>\n" +
+    "            <span>Created by {{newsItem.creator}} on {{newsItem.created}}</span>\n" +
     "        </div>\n" +
     "        <p ng-bind-html=\"newsItem.description\"></p>\n" +
     "    </div>\n" +
-    "    <div class=\"col-md-4\" ng-if=\"newsItem.contactName\">\n" +
-    "        <div class=\"well\">\n" +
+    "    <div class=\"col-md-4\">\n" +
+    "        <div class=\"well\" ng-if=\"newsItem.contactName\">\n" +
     "            <h4>For more information contact</h4>\n" +
     "            <ul class=\"fa-ul\">\n" +
     "                <li><span class=\"fa fa-user fa-li\"></span>{{newsItem.contactName}}</li>\n" +
@@ -48,6 +50,7 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "                <li><span class=\"fa fa-envelope fa-li\"></span>{{newsItem.contactEmail}}</li>\n" +
     "            </ul>\n" +
     "        </div>\n" +
+    "        <a href=\"#/news-exhibits\" class=\"btn btn-default\"><span class=\"fa fa-reply\"></span> See all news &amp; exhibits</a>\n" +
     "    </div>\n" +
     "</div>\n" +
     "");
@@ -80,7 +83,7 @@ angular.module("news/news-list.tpl.html", []).run(["$templateCache", function($t
     "            </div>\n" +
     "            <div class=\"media-body\">\n" +
     "                <h4 class=\"media-heading\">\n" +
-    "                    <a ng-href=\"#/news-events-exhibits/{{item.link}}\" ng-bind-html=\"item.title | highlight:newsFilters.search\"></a>\n" +
+    "                    <a ng-href=\"#/news-exhibits/{{item.link}}\" ng-bind-html=\"item.title | highlight:newsFilters.search\"></a>\n" +
     "                </h4>\n" +
     "                <div class=\"details-context\" ng-if=\"item.type > 0\">{{item.activeFrom | date:mediumDate}} - {{item.activeUntil | date:mediumDate}}</div>\n" +
     "                <p ng-bind-html=\"item.description | truncate:250:true | highlight:newsFilters.search\"></p>\n" +
