@@ -149,18 +149,20 @@ angular.module('ualib.news', [
         };
 
         newsList.$promise.then(function(data){
-            console.log(data);
             $scope.news = data.news;
             paramsToScope();
             filterWatcher = $scope.$watch('newsFilters', function(newVal, oldVal){
-                processFilters();
+                if (newVal !== oldVal){
+                    processFilters();
+                }
             }, true);
         });
-
 
         $scope.$on('$destroy', function(){
             filterWatcher();
         });
+
+
 
         function paramsToScope(){
             var params = $location.search();
