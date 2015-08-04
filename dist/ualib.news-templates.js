@@ -78,11 +78,12 @@ angular.module("news/news-list.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "        <div class=\"media animate-repeat\" ng-repeat=\"item in news | orderBy:newsFilters.sort | filter:{type: newsFilters.type} | filter:newsFilters.search\">\n" +
     "            <div class=\"media-left\">\n" +
-    "                <span class=\"fa fa-newspaper-o fa-2x text-muted\" ng-if=\"item.type == 0\"></span>\n" +
-    "                <span class=\"fa fa-leaf fa-2x text-muted\" ng-if=\"item.type == 1\"></span>\n" +
+    "                <img src=\"{{item.images[0].image}}\" width=\"150\">\n" +
     "            </div>\n" +
     "            <div class=\"media-body\">\n" +
     "                <h4 class=\"media-heading\">\n" +
+    "                    <span class=\"fa fa-newspaper-o\" ng-if=\"item.type == 0\"></span>\n" +
+    "                    <span class=\"fa fa-leaf\" ng-if=\"item.type == 1\"></span>\n" +
     "                    <a ng-href=\"#/news-exhibits/{{item.link}}\" ng-bind-html=\"item.title | highlight:newsFilters.search\"></a>\n" +
     "                </h4>\n" +
     "                <div class=\"details-context\" ng-if=\"item.type > 0\">{{item.activeFrom | date:mediumDate}} - {{item.activeUntil | date:mediumDate}}</div>\n" +
@@ -96,10 +97,11 @@ angular.module("news/news-list.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "        <div class=\"alert alert-warning text-center\" role=\"alert\" ng-show=\"news.length < 1\">\n" +
     "            <h2>\n" +
-    "                No <span ng-if=\"soft.cat\"><strong>{{soft.cat | lowercase}}</strong></span> software is available\n" +
-    "                <span ng-if=\"soft.os\">on <strong>{{soft.os == 1 ? 'Windows' : 'OS X'}}</strong> computers</span>\n" +
-    "                <span ng-if=\"soft.loc\">in <strong>{{soft.loc}}</strong></span>\n" +
-    "                <span ng-if=\"soft.search\">that matches the search \"<strong>{{soft.search}}</strong>\"</span>\n" +
+    "                No\n" +
+    "                <span ng-show=\"newsFilters.type == ''\">News or Exhibits</span>\n" +
+    "                <span ng-show=\"newsFilters.type == '0'\">News</span>\n" +
+    "                <span ng-show=\"newsFilters.type == '1'\">Exhibits</span>\n" +
+    "                match the search \"<strong>{{newsFilters.search}}</strong>\"</span>\n" +
     "            </h2>\n" +
     "        </div>\n" +
     "    </div>\n" +

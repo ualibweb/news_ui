@@ -17,9 +17,25 @@ angular.module('ualib.news', [
             news = $filter('unique')(news, 'title');
             return news.map(function(item){
                 var n = item;
+                n.type = 1;
+
                 // Convert timestamps into JS millisecond standard
-                n.activeFrom = (item.activeFrom * 1000);
-                n.activeUntil = (item.activeUntil * 1000);
+                if (item.activeFrom !== null) {
+                    n.activeFrom = (item.activeFrom * 1000);
+                } else {
+                    n.activeFrom = null;
+                }
+                if (item.activeUntil !== null) {
+                    n.activeUntil = (item.activeUntil * 1000);
+                } else {
+                    n.activeUntil = null;
+                }
+
+                //it is news if dates are not set, exhibit otherwise
+                if (n.activeFrom === null && n.activeUntil === null) {
+                    n.type = 0;
+                }
+                n.created = (item.created * 1000);
 
                 // If link doesn't already exist, create one from the new item's title
                 if (!n.hasOwnProperty('link')){
@@ -39,7 +55,7 @@ angular.module('ualib.news', [
             cache: false,
             get: {
                 method: 'GET',
-                params: {news: 'all'},
+                params: {news: 'archive'},
                 transformResponse: function(data){
                     var news = angular.fromJson(data);
                     formatted = preprocessNews(news.news);
@@ -71,7 +87,7 @@ angular.module('ualib.news', [
                 reloadOnSearch: false,
                 resolve: {
                     newsItem: function(ualibNewsFactory){
-                        return ualibNewsFactory.get({news: 'all'}, function(data){
+                        return ualibNewsFactory.get({news: 'archive'}, function(data){
                             return data;
                         }, function(data, status, headers, config) {
                             console.log('ERROR: news item');
@@ -122,7 +138,7 @@ angular.module('ualib.news', [
                 reloadOnSearch: false,
                 resolve: {
                     newsList: function(ualibNewsFactory){
-                        return ualibNewsFactory.get({news: 'all'}, function(data){
+                        return ualibNewsFactory.get({news: 'archive'}, function(data){
                             return data;
                         }, function(data, status, headers, config) {
                             console.log('ERROR: news');
@@ -143,7 +159,7 @@ angular.module('ualib.news', [
     .controller('newsListCtrl', ['$scope', '$location', 'newsList', function($scope, $location, newsList){
         var filterWatcher;
         $scope.newsFilters = {
-            sort: 'activeFrom',
+            sort: 'created',
             type: '',
             search: ''
         };

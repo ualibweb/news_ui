@@ -6,7 +6,7 @@ angular.module('ualib.news')
                 reloadOnSearch: false,
                 resolve: {
                     newsList: function(ualibNewsFactory){
-                        return ualibNewsFactory.get({news: 'all'}, function(data){
+                        return ualibNewsFactory.get({news: 'archive'}, function(data){
                             return data;
                         }, function(data, status, headers, config) {
                             console.log('ERROR: news');
@@ -27,7 +27,7 @@ angular.module('ualib.news')
     .controller('newsListCtrl', ['$scope', '$location', 'newsList', function($scope, $location, newsList){
         var filterWatcher;
         $scope.newsFilters = {
-            sort: 'activeFrom',
+            sort: 'created',
             type: '',
             search: ''
         };

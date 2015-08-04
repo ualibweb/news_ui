@@ -6,7 +6,7 @@ angular.module('ualib.news')
                 reloadOnSearch: false,
                 resolve: {
                     newsItem: function(ualibNewsFactory){
-                        return ualibNewsFactory.get({news: 'all'}, function(data){
+                        return ualibNewsFactory.get({news: 'archive'}, function(data){
                             return data;
                         }, function(data, status, headers, config) {
                             console.log('ERROR: news item');
