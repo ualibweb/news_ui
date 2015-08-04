@@ -78,7 +78,11 @@ angular.module("news/news-list.tpl.html", []).run(["$templateCache", function($t
     "\n" +
     "        <div class=\"media animate-repeat\" ng-repeat=\"item in news | orderBy:newsFilters.sort | filter:{type: newsFilters.type} | filter:newsFilters.search\">\n" +
     "            <div class=\"media-left\">\n" +
-    "                <img src=\"{{item.images[0].image}}\" width=\"150\">\n" +
+    "                <a ng-href=\"#/news-exhibits/{{item.link}}\" ng-if=\"item.images.length > 0\">\n" +
+    "                    <img src=\"{{item.images[0].image}}\" width=\"150\">\n" +
+    "                </a>\n" +
+    "                <span class=\"fa fa-newspaper-o fa-2x text-muted\" ng-if=\"item.type == 0 && item.images.length < 1\"></span>\n" +
+    "                <span class=\"fa fa-leaf fa-2x text-muted\" ng-if=\"item.type == 1 && item.images.length < 1\"></span>\n" +
     "            </div>\n" +
     "            <div class=\"media-body\">\n" +
     "                <h4 class=\"media-heading\">\n" +

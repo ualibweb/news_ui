@@ -10,12 +10,12 @@ angular.module('ualib.news')
 
                 // Convert timestamps into JS millisecond standard
                 if (item.activeFrom !== null) {
-                    n.activeFrom = (item.activeFrom * 1000);
+                    n.activeFrom = new Date(item.activeFrom * 1000);
                 } else {
                     n.activeFrom = null;
                 }
                 if (item.activeUntil !== null) {
-                    n.activeUntil = (item.activeUntil * 1000);
+                    n.activeUntil = new Date(item.activeUntil * 1000);
                 } else {
                     n.activeUntil = null;
                 }
@@ -24,7 +24,7 @@ angular.module('ualib.news')
                 if (n.activeFrom === null && n.activeUntil === null) {
                     n.type = 0;
                 }
-                n.created = (item.created * 1000);
+                n.created = new Date(item.created * 1000);
 
                 // If link doesn't already exist, create one from the new item's title
                 if (!n.hasOwnProperty('link')){
@@ -36,6 +36,7 @@ angular.module('ualib.news')
                     n.blurb = $filter('stripTags')(n.description);
                     n.blurb = $filter('truncate')(n.blurb, 250, '...', true);
                 }
+                console.dir(n);
                 return n;
             });
         }
