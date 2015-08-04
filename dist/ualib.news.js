@@ -47,7 +47,12 @@ angular.module('ualib.news', [
                     n.blurb = $filter('stripTags')(n.description);
                     n.blurb = $filter('truncate')(n.blurb, 250, '...', true);
                 }
-                console.dir(n);
+
+                n.slides = [];
+                for (var i = 0; i < item.images.length; i++) {
+                    n.slides.push({image: item.images[i], text: ""});
+                }
+
                 return n;
             });
         }
@@ -107,6 +112,9 @@ angular.module('ualib.news', [
     }])
 
     .controller('newsItemCtrl', ['$scope', 'newsItem', '$routeParams', function($scope, newsItem, $routeParams){
+        $scope.myInterval = 5000;
+        $scope.noWrapSlides = false;
+
        newsItem.$promise.then(function(data){
            for (var i = 0, len = data.news.length; i < len; i++){
                var item = data.news[i];

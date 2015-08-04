@@ -3,8 +3,16 @@
 </div>
 <div class="row">
     <div class="col-md-8">
+        <carousel interval="myInterval" no-wrap="noWrapSlides">
+            <slide ng-repeat="slide in newsItem.slides" active="slide.active">
+                <img ng-src="{{slide.image}}" style="margin:auto;">
+                <div class="carousel-caption">
+                    <h4>Slide {{$index}}</h4>
+                </div>
+            </slide>
+        </carousel>
         <div class="text-muted">
-            <span>Created by {{newsItem.creator}} on {{newsItem.created}}</span>
+            <span>Created by {{newsItem.creator}} on {{newsItem.created | date:mediumDate}}</span>
         </div>
         <p ng-bind-html="newsItem.description"></p>
     </div>

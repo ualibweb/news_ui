@@ -25,6 +25,9 @@ angular.module('ualib.news')
     }])
 
     .controller('newsItemCtrl', ['$scope', 'newsItem', '$routeParams', function($scope, newsItem, $routeParams){
+        $scope.myInterval = 5000;
+        $scope.noWrapSlides = false;
+
        newsItem.$promise.then(function(data){
            for (var i = 0, len = data.news.length; i < len; i++){
                var item = data.news[i];

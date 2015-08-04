@@ -36,7 +36,12 @@ angular.module('ualib.news')
                     n.blurb = $filter('stripTags')(n.description);
                     n.blurb = $filter('truncate')(n.blurb, 250, '...', true);
                 }
-                console.dir(n);
+
+                n.slides = [];
+                for (var i = 0; i < item.images.length; i++) {
+                    n.slides.push({image: item.images[i], text: ""});
+                }
+
                 return n;
             });
         }
