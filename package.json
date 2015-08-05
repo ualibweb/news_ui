@@ -1,6 +1,6 @@
 {
   "name": "ualib.news",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "News and events front-end UI",
   "main": [
     "ualib-news-tempaltes.js",
