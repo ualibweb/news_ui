@@ -6,7 +6,9 @@
         <div style="height: 305px" ng-if="newsItem.images.length > 0">
             <ul rn-carousel class="image" rn-carousel-controls rn-carousel-auto-slide>
                 <li ng-repeat="image in newsItem.images">
-                    <div class="layer">{{ image }}</div>
+                    <div ng-style="{'background-image': 'url(' + image + ')'}" class="bgimage">
+
+                    </div>
                 </li>
             </ul>
         </div>

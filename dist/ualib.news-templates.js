@@ -39,7 +39,9 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "        <div style=\"height: 305px\" ng-if=\"newsItem.images.length > 0\">\n" +
     "            <ul rn-carousel class=\"image\" rn-carousel-controls rn-carousel-auto-slide>\n" +
     "                <li ng-repeat=\"image in newsItem.images\">\n" +
-    "                    <div class=\"layer\">{{ image }}</div>\n" +
+    "                    <div ng-style=\"{'background-image': 'url(' + image + ')'}\" class=\"bgimage\">\n" +
+    "\n" +
+    "                    </div>\n" +
     "                </li>\n" +
     "            </ul>\n" +
     "        </div>\n" +
@@ -152,10 +154,6 @@ angular.module("today/news-today.tpl.html", []).run(["$templateCache", function(
     "    <masonry>\n" +
     "        <div class=\"masonry-brick\">\n" +
     "            <a news-card=\"item\" ng-repeat=\"item in news\">\n" +
-    "            </a>\n" +
-    "        </div>\n" +
-    "        <div class=\"masonry-brick\">\n" +
-    "            <a news-card=\"item\" ng-repeat=\"item in exhibitions\">\n" +
     "            </a>\n" +
     "        </div>\n" +
     "        <div class=\"masonry-brick\">\n" +
