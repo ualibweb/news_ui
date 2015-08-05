@@ -1,6 +1,6 @@
 {
   "name": "ualib.news",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "homepage": "https://github.com/ualibweb/news_ui",
   "main": [
     "ualib-news-tempaltes.js",
@@ -29,7 +29,8 @@
     "angular-filter": "~0.5.4",
     "ualib-ui": "https://github.com/ualibweb/ui-components.git",
     "ualib-hours": "https://github.com/ualibweb/hours_ui.git",
-    "angular-ui-utils": "~0.2.3"
+    "angular-ui-utils": "~0.2.3",
+    "angular-carousel": "0.3.12"
   },
   "dependencies": {}
 }

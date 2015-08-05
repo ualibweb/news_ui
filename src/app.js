@@ -8,5 +8,6 @@ angular.module('ualib.news', [
     'ui.utils',
     'ualib.ui',
     'ualib.hours',
-    'ualib.news.templates'
+    'ualib.news.templates',
+    'angular-carousel'
 ]);

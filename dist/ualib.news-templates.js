@@ -36,15 +36,12 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "</div>\n" +
     "<div class=\"row\">\n" +
     "    <div class=\"col-md-8\">\n" +
-    "        <div style=\"height: 305px\" ng-if=\"newsItem.slides.length > 0\">\n" +
-    "            <carousel interval=\"myInterval\" no-wrap=\"noWrapSlides\">\n" +
-    "                <slide ng-repeat=\"slide in newsItem.slides\" active=\"slide.active\">\n" +
-    "                    <img ng-src=\"{{slide.image}}\" style=\"margin:auto; height: 300px;\">\n" +
-    "                    <div class=\"carousel-caption\">\n" +
-    "                        <h4>Slide {{$index}}</h4>\n" +
-    "                    </div>\n" +
-    "                </slide>\n" +
-    "            </carousel>\n" +
+    "        <div style=\"height: 305px\" ng-if=\"newsItem.images.length > 0\">\n" +
+    "            <ul rn-carousel class=\"image\" rn-carousel-controls rn-carousel-auto-slide>\n" +
+    "                <li ng-repeat=\"image in newsItem.images\">\n" +
+    "                    <div class=\"layer\">{{ image }}</div>\n" +
+    "                </li>\n" +
+    "            </ul>\n" +
     "        </div>\n" +
     "        <div class=\"text-muted\">\n" +
     "            <span>Created by {{newsItem.creator}} on {{newsItem.created | date:mediumDate}}</span>\n" +

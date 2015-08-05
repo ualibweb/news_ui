@@ -8,7 +8,8 @@ angular.module('ualib.news', [
     'ui.utils',
     'ualib.ui',
     'ualib.hours',
-    'ualib.news.templates'
+    'ualib.news.templates',
+    'angular-carousel'
 ]);;angular.module('ualib.news')
 
     .factory('ualibNewsFactory', ['$resource', '$sce', '$filter', function($resource, $sce, $filter){
