@@ -38,10 +38,11 @@ angular.module('ualib.news')
                 }
 
                 n.slides = [];
-                if (typeof item.images !== 'undefined')
+                if (typeof item.images !== 'undefined') {
                     for (var i = 0; i < item.images.length; i++) {
                         n.slides.push({image: item.images[i], text: ""});
                     }
+                }
 
                 return n;
             });
