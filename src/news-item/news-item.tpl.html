@@ -4,10 +4,10 @@
 <div class="row">
     <div class="col-md-8">
         <div style="height: 305px" ng-if="newsItem.images.length > 0">
-            <ul rn-carousel class="image" rn-carousel-controls rn-carousel-auto-slide>
-                <li ng-repeat="image in newsItem.images">
-                    <div ng-style="{'background-image': 'url(' + image + ')'}" class="bgimage">
-
+            <ul rn-carousel rn-carousel-controls class="image">
+                <li ng-repeat="img in newsItem.images">
+                    <div class="layer">
+                        <img ng-src="{{img}}"/>
                     </div>
                 </li>
             </ul>

@@ -37,10 +37,10 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "<div class=\"row\">\n" +
     "    <div class=\"col-md-8\">\n" +
     "        <div style=\"height: 305px\" ng-if=\"newsItem.images.length > 0\">\n" +
-    "            <ul rn-carousel class=\"image\" rn-carousel-controls rn-carousel-auto-slide>\n" +
-    "                <li ng-repeat=\"image in newsItem.images\">\n" +
-    "                    <div ng-style=\"{'background-image': 'url(' + image + ')'}\" class=\"bgimage\">\n" +
-    "\n" +
+    "            <ul rn-carousel rn-carousel-controls class=\"image\">\n" +
+    "                <li ng-repeat=\"img in newsItem.images\">\n" +
+    "                    <div class=\"layer\">\n" +
+    "                        <img ng-src=\"{{img}}\"/>\n" +
     "                    </div>\n" +
     "                </li>\n" +
     "            </ul>\n" +
