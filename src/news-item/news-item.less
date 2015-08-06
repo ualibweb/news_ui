@@ -47,10 +47,17 @@
 
 // Import references to the Fontawesome icon variables
 @import (reference) "../../bower_components/fontawesome/less/variables.less";
+@import (reference) "../../bower_components/fontawesome/less/mixins.less";
 
 .rn-carousel-control {
-  font-size: 8em;
-  color: #ffffff;
+
+  &.rn-carousel-control-next, &.rn-carousel-control-prev {
+    &:before {
+      .fa-icon();  //use fontawesome fa-icon mixin to set font style
+      font-size: 2em;
+      color: #ffffff;
+    }
+  }
 
   &.rn-carousel-control-next {
     &:before {
