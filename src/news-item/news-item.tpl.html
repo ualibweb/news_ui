@@ -48,8 +48,8 @@
                 </div>
             </li>
         </ul>
-        <div class="rn-carousel-indicator text-center" ng-if="newsItem.images.length > 0">
-            <span ng-repeat="img in newsItem.images" class="news-carousel-large-indicators clickable-item"
+        <div class="news-carousel-large-indicators text-center" ng-if="newsItem.images.length > 0">
+            <span ng-repeat="img in newsItem.images" class="clickable-item"
                   ng-click="setCurEnlImage($index)">
                 <span class="fa fa-circle-o" ng-class="{'fa-2x': $index == $parent.curEnlImage}">
                 </span>
