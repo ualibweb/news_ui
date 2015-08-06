@@ -44,3 +44,24 @@
 .clickable-item {
   cursor:pointer;
 }
+
+.rn-carousel-control {
+  font-size: 8em;
+}
+
+// Import references to the Fontawesome icon variables
+@import (reference) "../../bower_components/fontawesome/less/variables.less";
+
+.rn-carousel-control-next {
+  color: #ffffff;
+  &:before {
+    content: @fa-var-chevron-right;
+  }
+}
+
+.rn-carousel-control-prev {
+  color: #ffffff;
+  &:before {
+    content: @fa-var-chevron-left;
+  }
+}

@@ -51,7 +51,7 @@
         <div class="news-carousel-large-indicators text-center" ng-if="newsItem.images.length > 0">
             <span ng-repeat="img in newsItem.images" class="clickable-item"
                   ng-click="setCurEnlImage($index)">
-                <span class="fa fa-circle-o" ng-class="{'fa-2x': $index == $parent.curEnlImage}">
+                <span class="fa fa-2x fa-circle-o" ng-class="{'fa-3x': $index == $parent.curEnlImage}">
                 </span>
             </span>
         </div>
