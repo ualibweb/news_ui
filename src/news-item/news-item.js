@@ -26,13 +26,20 @@ angular.module('ualib.news')
 
     .controller('newsItemCtrl', ['$scope', 'newsItem', '$routeParams', function($scope, newsItem, $routeParams){
         $scope.showEnlarged = false;
+        $scope.curImage = 0;
+        $scope.curEnlImage = 0;
 
-        $scope.enlargeImages = function(enlarge) {
+        $scope.enlargeImages = function(enlarge, index) {
             if (enlarge) {
                 $scope.showEnlarged = true;
+                $scope.curEnlImage = index;
             } else {
                 $scope.showEnlarged = false;
             }
+        };
+
+        $scope.setCurEnlImage = function(index) {
+            $scope.curEnlImage = index;
         };
 
        newsItem.$promise.then(function(data){

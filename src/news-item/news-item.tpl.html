@@ -4,22 +4,23 @@
 <div class="row">
     <div class="col-md-8">
         <div class="text-center" ng-if="newsItem.images.length > 0">
-            <ul rn-carousel rn-carousel-controls rn-carousel-controls-allow-loop rn-carousel-index="curImage"
-                class="image" style="width:500px; height:275px;">
+            <ul rn-carousel rn-carousel-auto-slide rn-carousel-buffered
+                rn-carousel-index="curImage"
+                class="image" style="width:500px; height:275px;margin: auto;">
                 <li ng-repeat="img in newsItem.images">
                     <div class="layer text-center">
-                        <div style="width:500px;height:275px;
+                        <div style="width:100%;height:275px;
                             cursor: pointer;
                             background-position: center center;
                             background-repeat: no-repeat;
                             background-size: contain;"
-                             ng-style="{'background-image':'url('+img+')'}" ng-click="enlargeImages(true)">
+                             ng-style="{'background-image':'url('+img+')'}" ng-click="enlargeImages(true, $index)">
                         </div>
                     </div>
                 </li>
             </ul>
-            <div class="text-center" rn-carousel-indicators ng-if="newsItem.images.length > 1" slides="newsItem.images"
-                 rn-carousel-index="curImage" style="margin-top:-10px;"></div>
+            <div rn-carousel-indicators ng-if="newsItem.images.length > 1" slides="newsItem.images" rn-carousel-index="curImage">
+            </div>
         </div>
         <div class="text-muted">
             <span>Created by {{newsItem.creator}} on {{newsItem.created | date:mediumDate}}</span>
@@ -44,25 +45,28 @@
         position: absolute;
         top:0px;
         left:0px;
-        background-color: rgba(222,222,222,0.5);
+        background-color: rgba(202,202,202,0.7);
         z-index:20;">
-            <ul rn-carousel rn-carousel-controls rn-carousel-controls-allow-loop rn-carousel-index="curImage"
-                class="image" style="width:1024px; height:1024px;">
+            <ul rn-carousel rn-carousel-controls rn-carousel-controls-allow-loop rn-carousel-buffered
+                rn-carousel-index="curEnlImage" rn-carousel-transition="none"
+                class="image" style="width:1024px; height:768px;margin: auto;">
                 <li ng-repeat="img in newsItem.images">
                     <div class="layer text-center">
-                        <div style="width:1024px; height:1024px;;
+                        <div style="width:1024px; height:768px;
                                 cursor: pointer;
                                 background-position: center center;
-                                background-repeat: no-repeat;
-                                background-size: contain;"
-                             ng-style="{'background-image':'url('+img+')'}" ng-click="enlargeImages(false)">
+                                background-repeat: no-repeat;"
+                             ng-style="{'background-image':'url('+img+')'}" ng-click="enlargeImages(false, $index)">
                         </div>
                     </div>
                 </li>
             </ul>
-            <div class="text-center" rn-carousel-indicators ng-if="newsItem.images.length > 1" slides="newsItem.images"
-                 rn-carousel-index="curImage" style="margin-top:-10px;">
-
+            <div class="rn-carousel-indicator text-center" ng-if="newsItem.images.length > 0">
+                <span ng-repeat="img in newsItem.images" style="cursor:pointer;"
+                      ng-click="setCurEnlImage($index)">
+                    <span class="fa fa-circle-o" ng-class="{'fa-2x': $index == $parent.curEnlImage}">
+                    </span>
+                </span>
             </div>
     </div>
 </div>
