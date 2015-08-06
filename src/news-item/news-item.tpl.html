@@ -25,7 +25,7 @@
         <div class="text-muted">
             <span>Created by {{newsItem.creator}} on {{newsItem.created | date:mediumDate}}</span>
         </div>
-        <p ng-bind-html="newsItem.description"></p>
+        <p class="text-justify" ng-bind-html="newsItem.description"></p>
     </div>
     <div class="col-md-4">
         <div class="well" ng-if="newsItem.contactName">
@@ -42,14 +42,14 @@
 <div ng-show="showEnlarged">
     <div style="width: 100%;
         height: 100%;
-        position: absolute;
+        position: fixed;
         top:0px;
         left:0px;
         background-color: rgba(202,202,202,0.7);
         z-index:20;">
             <ul rn-carousel rn-carousel-controls rn-carousel-controls-allow-loop rn-carousel-buffered
                 rn-carousel-index="curEnlImage" rn-carousel-transition="none"
-                class="image" style="width:1024px; height:768px;margin: auto;">
+                class="image" style="width:1024px; height:768px;margin: 120px auto auto auto;">
                 <li ng-repeat="img in newsItem.images">
                     <div class="layer text-center">
                         <div style="width:1024px; height:768px;
