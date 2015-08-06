@@ -72,7 +72,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transform: translate(0, 0);
-  font-size: 2em;
+  font-size: 3em;
   color: #ffffff;
 }
 .rn-carousel-control.rn-carousel-control-next:before {
