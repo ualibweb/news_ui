@@ -3,14 +3,23 @@
 </div>
 <div class="row">
     <div class="col-md-8">
-        <div style="height: 305px" ng-if="newsItem.images.length > 0">
-            <ul rn-carousel rn-carousel-controls class="image">
+        <div class="text-center" ng-if="newsItem.images.length > 0">
+            <ul rn-carousel rn-carousel-controls rn-carousel-controls-allow-loop rn-carousel-index="curImage"
+                class="image" style="width:500px; height:275px;">
                 <li ng-repeat="img in newsItem.images">
-                    <div class="layer">
-                        <img ng-src="{{img}}"/>
+                    <div class="layer text-center">
+                        <div style="width:500px;height:275px;
+                            cursor: pointer;
+                            background-position: center center;
+                            background-repeat: no-repeat;
+                            background-size: contain;"
+                             ng-style="{'background-image':'url('+img+')'}" ng-click="enlargeImages(true)">
+                        </div>
                     </div>
                 </li>
             </ul>
+            <div class="text-center" rn-carousel-indicators ng-if="newsItem.images.length > 1" slides="newsItem.images"
+                 rn-carousel-index="curImage" style="margin-top:-10px;"></div>
         </div>
         <div class="text-muted">
             <span>Created by {{newsItem.creator}} on {{newsItem.created | date:mediumDate}}</span>
@@ -27,5 +36,33 @@
             </ul>
         </div>
         <a href="#/news-exhibits" class="btn btn-default"><span class="fa fa-reply"></span> See all news &amp; exhibits</a>
+    </div>
+</div>
+<div ng-show="showEnlarged">
+    <div style="width: 100%;
+        height: 100%;
+        position: absolute;
+        top:0px;
+        left:0px;
+        background-color: rgba(222,222,222,0.5);
+        z-index:20;">
+            <ul rn-carousel rn-carousel-controls rn-carousel-controls-allow-loop rn-carousel-index="curImage"
+                class="image" style="width:1024px; height:1024px;">
+                <li ng-repeat="img in newsItem.images">
+                    <div class="layer text-center">
+                        <div style="width:1024px; height:1024px;;
+                                cursor: pointer;
+                                background-position: center center;
+                                background-repeat: no-repeat;
+                                background-size: contain;"
+                             ng-style="{'background-image':'url('+img+')'}" ng-click="enlargeImages(false)">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="text-center" rn-carousel-indicators ng-if="newsItem.images.length > 1" slides="newsItem.images"
+                 rn-carousel-index="curImage" style="margin-top:-10px;">
+
+            </div>
     </div>
 </div>

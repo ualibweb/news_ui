@@ -36,14 +36,23 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "</div>\n" +
     "<div class=\"row\">\n" +
     "    <div class=\"col-md-8\">\n" +
-    "        <div style=\"height: 305px\" ng-if=\"newsItem.images.length > 0\">\n" +
-    "            <ul rn-carousel rn-carousel-controls class=\"image\">\n" +
+    "        <div class=\"text-center\" ng-if=\"newsItem.images.length > 0\">\n" +
+    "            <ul rn-carousel rn-carousel-controls rn-carousel-controls-allow-loop rn-carousel-index=\"curImage\"\n" +
+    "                class=\"image\" style=\"width:500px; height:275px;\">\n" +
     "                <li ng-repeat=\"img in newsItem.images\">\n" +
-    "                    <div class=\"layer\">\n" +
-    "                        <img ng-src=\"{{img}}\"/>\n" +
+    "                    <div class=\"layer text-center\">\n" +
+    "                        <div style=\"width:500px;height:275px;\n" +
+    "                            cursor: pointer;\n" +
+    "                            background-position: center center;\n" +
+    "                            background-repeat: no-repeat;\n" +
+    "                            background-size: contain;\"\n" +
+    "                             ng-style=\"{'background-image':'url('+img+')'}\" ng-click=\"enlargeImages(true)\">\n" +
+    "                        </div>\n" +
     "                    </div>\n" +
     "                </li>\n" +
     "            </ul>\n" +
+    "            <div class=\"text-center\" rn-carousel-indicators ng-if=\"newsItem.images.length > 1\" slides=\"newsItem.images\"\n" +
+    "                 rn-carousel-index=\"curImage\" style=\"margin-top:-10px;\"></div>\n" +
     "        </div>\n" +
     "        <div class=\"text-muted\">\n" +
     "            <span>Created by {{newsItem.creator}} on {{newsItem.created | date:mediumDate}}</span>\n" +
@@ -60,6 +69,34 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "            </ul>\n" +
     "        </div>\n" +
     "        <a href=\"#/news-exhibits\" class=\"btn btn-default\"><span class=\"fa fa-reply\"></span> See all news &amp; exhibits</a>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<div ng-show=\"showEnlarged\">\n" +
+    "    <div style=\"width: 100%;\n" +
+    "        height: 100%;\n" +
+    "        position: absolute;\n" +
+    "        top:0px;\n" +
+    "        left:0px;\n" +
+    "        background-color: rgba(222,222,222,0.5);\n" +
+    "        z-index:20;\">\n" +
+    "            <ul rn-carousel rn-carousel-controls rn-carousel-controls-allow-loop rn-carousel-index=\"curImage\"\n" +
+    "                class=\"image\" style=\"width:1024px; height:1024px;\">\n" +
+    "                <li ng-repeat=\"img in newsItem.images\">\n" +
+    "                    <div class=\"layer text-center\">\n" +
+    "                        <div style=\"width:1024px; height:1024px;;\n" +
+    "                                cursor: pointer;\n" +
+    "                                background-position: center center;\n" +
+    "                                background-repeat: no-repeat;\n" +
+    "                                background-size: contain;\"\n" +
+    "                             ng-style=\"{'background-image':'url('+img+')'}\" ng-click=\"enlargeImages(false)\">\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </li>\n" +
+    "            </ul>\n" +
+    "            <div class=\"text-center\" rn-carousel-indicators ng-if=\"newsItem.images.length > 1\" slides=\"newsItem.images\"\n" +
+    "                 rn-carousel-index=\"curImage\" style=\"margin-top:-10px;\">\n" +
+    "\n" +
+    "            </div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "");
@@ -88,7 +125,7 @@ angular.module("news/news-list.tpl.html", []).run(["$templateCache", function($t
     "        <div class=\"media animate-repeat\" ng-repeat=\"item in news | filter:{type: newsFilters.type}\n" +
     "                                                                  | filter:newsFilters.search\n" +
     "                                                                  | orderBy:['-sticky','-created']\">\n" +
-    "            <div class=\"media-left\" style=\"width:150px;\">\n" +
+    "            <div class=\"media-left text-center\" style=\"width:150px;\">\n" +
     "                <a ng-href=\"#/news-exhibits/{{item.link}}\">\n" +
     "                    <img class=\"media-object\" src=\"{{item.tb}}\" ng-if=\"item.tb.length > 0\">\n" +
     "                    <img class=\"media-object\" src=\"https://wwwdev2.lib.ua.edu/newsApp/images/tb_news.png\"\n" +

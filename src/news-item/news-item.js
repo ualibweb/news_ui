@@ -25,8 +25,15 @@ angular.module('ualib.news')
     }])
 
     .controller('newsItemCtrl', ['$scope', 'newsItem', '$routeParams', function($scope, newsItem, $routeParams){
-        $scope.myInterval = 5000;
-        $scope.noWrapSlides = false;
+        $scope.showEnlarged = false;
+
+        $scope.enlargeImages = function(enlarge) {
+            if (enlarge) {
+                $scope.showEnlarged = true;
+            } else {
+                $scope.showEnlarged = false;
+            }
+        };
 
        newsItem.$promise.then(function(data){
            for (var i = 0, len = data.news.length; i < len; i++){
