@@ -1,6 +1,6 @@
 {
   "name": "ualib.news",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "homepage": "https://github.com/ualibweb/news_ui",
   "main": [
     "ualib-news-tempaltes.js",

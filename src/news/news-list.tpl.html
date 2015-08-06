@@ -20,25 +20,12 @@
         <div class="media animate-repeat" ng-repeat="item in news | filter:{type: newsFilters.type}
                                                                   | filter:newsFilters.search
                                                                   | orderBy:['-sticky','-created']">
-            <div class="media-left" style="min-width:180px;
-                 background-position: center center;
-                 background-repeat: no-repeat;
-                 background-size: contain;"
+            <div class="media-left news-list-tb"
                  ng-style="{'background-image':'url('+item.tb+')'}" ng-if="item.tb.length > 0">
             </div>
-            <div class="media-left" style="min-width:180px;
-                 background-position: center center;
-                 background-repeat: no-repeat;
-                 background-size: contain;
-                 background-image:url('https://wwwdev2.lib.ua.edu/newsApp/images/tb_news.png');"
-                 ng-if="item.type == 0 && item.images.length == 0">
+            <div class="media-left news-list-tb news-list-tb-news" ng-if="item.type == 0 && item.images.length == 0">
             </div>
-            <div class="media-left" style="min-width:180px;
-                 background-position: center center;
-                 background-repeat: no-repeat;
-                 background-size: contain;
-                 background-image:url(https://wwwdev2.lib.ua.edu/newsApp/images/tb_exhibit.png)"
-                 ng-if="item.type == 1 && item.images.length == 0">
+            <div class="media-left news-list-tb news-list-tb-exhibit" ng-if="item.type == 1 && item.images.length == 0">
             </div>
             <div class="media-body">
                 <h4 class="media-heading">
