@@ -1,6 +1,6 @@
 angular.module('ualib.news')
 
-    .factory('ualibNewsFactory', ['$resource', '$sce', '$filter', function($resource, $sce, $filter){
+    .factory('ualibNewsFactory', ['$resource', '$sce', '$filter', '$http', function($resource, $sce, $filter, $http){
 
         function preprocessNews(news){
             news = $filter('unique')(news, 'title');
@@ -41,22 +41,33 @@ angular.module('ualib.news')
             });
         }
 
+        //TODO: centralize this function so it can be used with all apps
+        // Extend the default responseTransform array - Straight from Angular 1.2.8 API docs - https://docs.angularjs.org/api/ng/service/$http#overriding-the-default-transformations-per-request
+        function appendTransform(defaults, transform) {
+
+            // We can't guarantee that the default transformation is an array1
+            defaults = angular.isArray(defaults) ? defaults : [defaults];
+            console.log(defaults.concat(transform));
+            // Append the new transformation to the defaults
+            return defaults.concat(transform);
+        }
+
         return $resource('https://wwwdev2.lib.ua.edu/newsApp/api/:news', {}, {
             cache: false,
             get: {
                 method: 'GET',
                 params: {news: 'archive'},
-                transformResponse: function(data){
+                transformResponse: appendTransform($http.defaults.transformResponse, function(data){
                     var news = angular.fromJson(data);
                     formatted = preprocessNews(news.news);
                     news.news = formatted;
                     return news;
-                }
+                })
             },
             today: {
                 method: 'GET',
                 params: {news: 'today'},
-                transformResponse: function(data){
+                transformResponse: appendTransform($http.defaults.transformResponse, function(data){
                     var news = angular.fromJson(data);
                     //var formatted = $filter('unique')(news.news, 'title');
                     for (var prop in news){
@@ -66,7 +77,7 @@ angular.module('ualib.news')
                         }
                     }
                     return news;
-                }
+                })
             }
         });
     }]);
