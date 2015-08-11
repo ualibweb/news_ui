@@ -59,7 +59,7 @@ angular.module('ualib.news', [
 
             // We can't guarantee that the default transformation is an array1
             defaults = angular.isArray(defaults) ? defaults : [defaults];
-            console.log(defaults.concat(transform));
+            //console.log(defaults.concat(transform));
             // Append the new transformation to the defaults
             return defaults.concat(transform);
         }
@@ -99,7 +99,7 @@ angular.module('ualib.news', [
             .when('/news-exhibits/:link', {
                 reloadOnSearch: false,
                 resolve: {
-                    newsItem: function(ualibNewsFactory){
+                    newsItem: ['ualibNewsFactory', function(ualibNewsFactory){
                         return ualibNewsFactory.get({news: 'archive'}, function(data){
                             return data;
                         }, function(data, status, headers, config) {
@@ -111,7 +111,7 @@ angular.module('ualib.news', [
                                 config: config
                             });
                         });
-                    }
+                    }]
                 },
                 templateUrl: 'news-item/news-item.tpl.html',
                 controller: 'newsItemCtrl'
@@ -155,10 +155,7 @@ angular.module('ualib.news', [
                 newsFilters: '=?',
                 newsType: '@'
             },
-            templateUrl: function(tElem, tAttrs){
-                var type = angular.isDefined(tAttrs.newsType) ? tAttrs.newsType : 'news';
-                return 'news-item/' + type + '-card.tpl.html';
-            }
+            templateUrl: 'news-item/news-card.tpl.html'
         };
     }]);;angular.module('ualib.news')
 
@@ -167,7 +164,7 @@ angular.module('ualib.news', [
             .when('/news-exhibits/', {
                 reloadOnSearch: false,
                 resolve: {
-                    newsList: function(ualibNewsFactory){
+                    newsList: ['ualibNewsFactory', function(ualibNewsFactory){
                         return ualibNewsFactory.get({news: 'archive'}, function(data){
                             return data;
                         }, function(data, status, headers, config) {
@@ -179,7 +176,7 @@ angular.module('ualib.news', [
                                 config: config
                             });
                         });
-                    }
+                    }]
                 },
                 templateUrl: 'news/news-list.tpl.html',
                 controller: 'newsListCtrl'

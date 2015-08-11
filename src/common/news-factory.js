@@ -47,7 +47,7 @@ angular.module('ualib.news')
 
             // We can't guarantee that the default transformation is an array1
             defaults = angular.isArray(defaults) ? defaults : [defaults];
-            console.log(defaults.concat(transform));
+            //console.log(defaults.concat(transform));
             // Append the new transformation to the defaults
             return defaults.concat(transform);
         }

@@ -5,7 +5,7 @@ angular.module('ualib.news')
             .when('/news-exhibits/', {
                 reloadOnSearch: false,
                 resolve: {
-                    newsList: function(ualibNewsFactory){
+                    newsList: ['ualibNewsFactory', function(ualibNewsFactory){
                         return ualibNewsFactory.get({news: 'archive'}, function(data){
                             return data;
                         }, function(data, status, headers, config) {
@@ -17,7 +17,7 @@ angular.module('ualib.news')
                                 config: config
                             });
                         });
-                    }
+                    }]
                 },
                 templateUrl: 'news/news-list.tpl.html',
                 controller: 'newsListCtrl'
