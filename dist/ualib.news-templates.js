@@ -23,7 +23,12 @@ angular.module("news-item/news-card.tpl.html", []).run(["$templateCache", functi
     "        <h4 class=\"media-heading\">\n" +
     "            <span ng-bind-html=\"newsCard.title\"></span>\n" +
     "        </h4>\n" +
-    "        <div class=\"details-context\" ng-if=\"(newsCard.activeFrom != newsCard.activeUntil && newsCard.type != 0)\">{{newsCard.activeFrom | date:mediumDate}} - {{newsCard.activeUntil | date:mediumDate}}</div>\n" +
+    "        <div class=\"details-context\" ng-if=\"(newsCard.activeFrom != newsCard.activeUntil && newsCard.type != 0)\">\n" +
+    "            {{newsCard.activeFrom | date:mediumDate}} - {{newsCard.activeUntil | date:mediumDate}}\n" +
+    "        </div>\n" +
+    "        <div class=\"details-context\" ng-if=\"(newsCard.type == 0)\">\n" +
+    "            {{newsCard.created | date:mediumDate}}\n" +
+    "        </div>\n" +
     "        <p ng-bind-html=\"newsCard.blurb\"></p>\n" +
     "    </div>\n" +
     "</a>");
@@ -127,6 +132,7 @@ angular.module("news/news-list.tpl.html", []).run(["$templateCache", function($t
     "                <h4 class=\"media-heading\">\n" +
     "                    <a ng-href=\"#/news-exhibits/{{item.link}}\" ng-bind-html=\"item.title | highlight:newsFilters.search\"></a>\n" +
     "                    <small ng-if=\"item.type > 0\">{{item.activeFrom | date:mediumDate}} - {{item.activeUntil | date:mediumDate}}</small>\n" +
+    "                    <small ng-if=\"item.type < 1\">{{item.created | date:mediumDate}}</small>\n" +
     "                </h4>\n" +
     "                <p class=\"text-justify\">\n" +
     "                    <span ng-bind-html=\"item.description | truncate:250:'...' | highlight:newsFilters.search\">\n" +

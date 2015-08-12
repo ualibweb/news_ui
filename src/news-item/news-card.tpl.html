@@ -3,7 +3,12 @@
         <h4 class="media-heading">
             <span ng-bind-html="newsCard.title"></span>
         </h4>
-        <div class="details-context" ng-if="(newsCard.activeFrom != newsCard.activeUntil && newsCard.type != 0)">{{newsCard.activeFrom | date:mediumDate}} - {{newsCard.activeUntil | date:mediumDate}}</div>
+        <div class="details-context" ng-if="(newsCard.activeFrom != newsCard.activeUntil && newsCard.type != 0)">
+            {{newsCard.activeFrom | date:mediumDate}} - {{newsCard.activeUntil | date:mediumDate}}
+        </div>
+        <div class="details-context" ng-if="(newsCard.type == 0)">
+            {{newsCard.created | date:mediumDate}}
+        </div>
         <p ng-bind-html="newsCard.blurb"></p>
     </div>
 </a>
