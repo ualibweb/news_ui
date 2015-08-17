@@ -155,7 +155,10 @@ angular.module('ualib.news', [
                 newsFilters: '=?',
                 newsType: '@'
             },
-            templateUrl: 'news-item/news-card.tpl.html'
+            templateUrl: function(tElem, tAttrs){
+                var type = angular.isDefined(tAttrs.newsType) ? tAttrs.newsType : 'news';
+                return 'news-item/' + type + '-card.tpl.html';
+            }
         };
     }]);;angular.module('ualib.news')
 
