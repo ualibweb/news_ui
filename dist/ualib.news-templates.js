@@ -156,24 +156,13 @@ angular.module("news/news-list.tpl.html", []).run(["$templateCache", function($t
     "        </div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"col-md-3 software-list-container\">\n" +
-    "        <h3>Filters</h3>\n" +
+    "    <div class=\"col-md-3 hidden-xs\">\n" +
+    "        <h4>Filters</h4>\n" +
     "        <form class=\"facets-form\">\n" +
     "            <div class=\"form-group\">\n" +
     "                <input type=\"text\" class=\"form-control\" ng-model=\"newsFilters.search\" placeholder=\"Keyword search\">\n" +
     "            </div>\n" +
-    "\n" +
-    "            <div class=\"form-group\">\n" +
-    "                <label for=\"byType\">Type</label>\n" +
-    "                <div id=\"byType\" class=\"btn-group btn-group-justified btn-group-sm\">\n" +
-    "                    <label class=\"btn btn-default\" ng-model=\"newsFilters.type\" btn-radio=\"''\">All</label>\n" +
-    "                    <label class=\"btn btn-default\" ng-model=\"newsFilters.type\" btn-radio=\"'0'\">News</label>\n" +
-    "                    <label class=\"btn btn-default\" ng-model=\"newsFilters.type\" btn-radio=\"'1'\">Exhibits</label>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
     "        </form>\n" +
-    "\n" +
-    "\n" +
     "    </div>\n" +
     "\n" +
     "</div>");

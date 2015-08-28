@@ -55,24 +55,13 @@
         </div>
     </div>
 
-    <div class="col-md-3 software-list-container">
-        <h3>Filters</h3>
+    <div class="col-md-3 hidden-xs">
+        <h4>Filters</h4>
         <form class="facets-form">
             <div class="form-group">
                 <input type="text" class="form-control" ng-model="newsFilters.search" placeholder="Keyword search">
             </div>
-
-            <div class="form-group">
-                <label for="byType">Type</label>
-                <div id="byType" class="btn-group btn-group-justified btn-group-sm">
-                    <label class="btn btn-default" ng-model="newsFilters.type" btn-radio="''">All</label>
-                    <label class="btn btn-default" ng-model="newsFilters.type" btn-radio="'0'">News</label>
-                    <label class="btn btn-default" ng-model="newsFilters.type" btn-radio="'1'">Exhibits</label>
-                </div>
-            </div>
         </form>
-
-
     </div>
 
 </div>

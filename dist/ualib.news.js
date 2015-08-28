@@ -65,7 +65,6 @@ angular.module('ualib.news', [
         }
 
         return $resource('//wwwdev2.lib.ua.edu/newsApp/api/:news', {}, {
-            cache: false,
             get: {
                 method: 'GET',
                 params: {news: 'archive'},
@@ -79,6 +78,7 @@ angular.module('ualib.news', [
             today: {
                 method: 'GET',
                 params: {news: 'today'},
+                cache: false,
                 transformResponse: appendTransform($http.defaults.transformResponse, function(data){
                     var news = angular.fromJson(data);
                     //var formatted = $filter('unique')(news.news, 'title');
