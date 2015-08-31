@@ -1,9 +1,9 @@
 {
   "name": "ualib.news",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "homepage": "https://github.com/ualibweb/news_ui",
   "main": [
-    "dist/ualib.news-tempaltes.js",
+    "dist/ualib.news-templates.js",
     "dist/ualib.news.js",
     "dist/ualib.news.css"
   ],
