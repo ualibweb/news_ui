@@ -68,6 +68,7 @@ angular.module('ualib.news', [
             get: {
                 method: 'GET',
                 params: {news: 'archive'},
+                cache: true,
                 transformResponse: appendTransform($http.defaults.transformResponse, function(data){
                     var news = angular.fromJson(data);
                     formatted = preprocessNews(news.news);
@@ -78,7 +79,7 @@ angular.module('ualib.news', [
             today: {
                 method: 'GET',
                 params: {news: 'today'},
-                cache: false,
+                cache: true,
                 transformResponse: appendTransform($http.defaults.transformResponse, function(data){
                     var news = angular.fromJson(data);
                     //var formatted = $filter('unique')(news.news, 'title');
