@@ -42,7 +42,7 @@ module.exports = function(grunt) {
         html2js:{
             src: {
                 src: 'src/**/*.tpl.html',
-                dest: 'dist/<%= pkg.name %>-templates.js',
+                dest: 'tmp/templates.js',
                 module: '<%= pkg.name %>.templates'
             }
         },
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
                 separator: ';'
             },
             dist: {
-                src: ['src/**/*.js'],
+                src: ['tmp/templates.js', 'src/**/*.js'],
                 dest: 'dist/<%= pkg.name %>.js'
             }
         },
@@ -83,9 +83,12 @@ module.exports = function(grunt) {
         uglify: {
             dist: {
                 files: {
-                    'dist/<%= pkg.name %>.min.js': ['dist/<%= pkg.name %>-templates.js', 'dist/<%= pkg.name %>.js']
+                    'dist/<%= pkg.name %>.min.js': ['dist/<%= pkg.name %>.js']
                 }
             }
+        },
+        clean: {
+            app: ['tmp/']
         },
         wiredep: {
             demo: {
@@ -143,7 +146,8 @@ module.exports = function(grunt) {
         'less:dev',
         'concat',
         'wiredep',
-        'copy'
+        'copy',
+        'clean'
     ]);
     grunt.registerTask('build', [
         'html2js',
@@ -151,6 +155,7 @@ module.exports = function(grunt) {
         'ngAnnotate',
         'uglify',
         'less:build',
-        'copy'
+        'copy',
+        'clean'
     ]);
 };
