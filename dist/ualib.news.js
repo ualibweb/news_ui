@@ -121,13 +121,6 @@ angular.module("news/news-list.tpl.html", []).run(["$templateCache", function($t
     "        <div class=\"media animate-repeat\" ng-repeat=\"item in news | filter:{type: newsFilters.type}\n" +
     "                                                                  | filter:newsFilters.search\n" +
     "                                                                  | orderBy:['-sticky','-created']\">\n" +
-    "            <div class=\"media-left news-list-tb\"\n" +
-    "                 ng-style=\"{'background-image':'url('+item.tb+')'}\" ng-if=\"item.tb.length > 0\">\n" +
-    "            </div>\n" +
-    "            <div class=\"media-left news-list-tb news-list-tb-news\" ng-if=\"item.type == 0 && item.images.length == 0\">\n" +
-    "            </div>\n" +
-    "            <div class=\"media-left news-list-tb news-list-tb-exhibit\" ng-if=\"item.type == 1 && item.images.length == 0\">\n" +
-    "            </div>\n" +
     "            <div class=\"media-body\">\n" +
     "                <h4 class=\"media-heading\">\n" +
     "                    <a ng-href=\"#/news-exhibits/{{item.link}}\" ng-bind-html=\"item.title | highlight:newsFilters.search\"></a>\n" +
