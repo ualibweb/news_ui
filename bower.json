@@ -18,12 +18,13 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
-    "angular-filter": "~0.5.4",
-    "angular-ui-utils": "~0.2.3",
-    "angular-carousel": "~0.3.12"
-  },
   "dependencies": {
+    "angular-filter": "~0.5.5",
+    "angular-ui-utils": "~0.2.3",
+    "angular-carousel": "~0.3.12",
+    "angular-ui-tinymce": "latest"
+  },
+  "devDependencies": {
     "fontawesome": "~4.3.0",
     "angular": ">=1 <1.3.0",
     "angular-route": ">=1 <1.3.0",
