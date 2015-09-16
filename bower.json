@@ -21,8 +21,7 @@
   "dependencies": {
     "angular-filter": "~0.5.5",
     "angular-ui-utils": "~0.2.3",
-    "angular-carousel": "~0.3.12",
-    "angular-ui-tinymce": "latest"
+    "angular-carousel": "~0.3.12"
   },
   "devDependencies": {
     "fontawesome": "~4.3.0",
