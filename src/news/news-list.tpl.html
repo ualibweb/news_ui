@@ -27,7 +27,7 @@
                     <small ng-if="item.type < 1">{{item.created | date:mediumDate}}</small>
                 </h4>
                 <p class="text-justify">
-                    <span ng-bind-html="item.description | truncate:250:'...' | highlight:newsFilters.search">
+                    <span ng-bind-html="item.blurb | highlight:newsFilters.search">
                     </span>
                 </p>
             </div>

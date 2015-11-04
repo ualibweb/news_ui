@@ -128,7 +128,7 @@ angular.module("news/news-list.tpl.html", []).run(["$templateCache", function($t
     "                    <small ng-if=\"item.type < 1\">{{item.created | date:mediumDate}}</small>\n" +
     "                </h4>\n" +
     "                <p class=\"text-justify\">\n" +
-    "                    <span ng-bind-html=\"item.description | truncate:250:'...' | highlight:newsFilters.search\">\n" +
+    "                    <span ng-bind-html=\"item.blurb | highlight:newsFilters.search\">\n" +
     "                    </span>\n" +
     "                </p>\n" +
     "            </div>\n" +
@@ -395,7 +395,8 @@ angular.module("today/news-today.tpl.html", []).run(["$templateCache", function(
             filterWatcher();
         });
 
-
+        //TODO: will need to replace highlight filter by a custom one
+        // if we use item.description instead of item.blurb
 
         function paramsToScope(){
             var params = $location.search();

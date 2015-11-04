@@ -46,7 +46,8 @@ angular.module('ualib.news')
             filterWatcher();
         });
 
-
+        //TODO: will need to replace highlight filter by a custom one
+        // if we use item.description instead of item.blurb
 
         function paramsToScope(){
             var params = $location.search();
