@@ -4,6 +4,7 @@ angular.module('ualib.news', [
     'ngSanitize',
     'ngAnimate',
     'angular.filter',
+    'duScroll',
     'ui.bootstrap',
     'ui.utils',
     'ualib.ui',

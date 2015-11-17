@@ -24,17 +24,28 @@ angular.module('ualib.news')
             });
     }])
 
-    .controller('newsItemCtrl', ['$scope', 'newsItem', '$routeParams', function($scope, newsItem, $routeParams){
+    .controller('newsItemCtrl', ['$scope', 'newsItem', '$routeParams', '$document', function($scope, newsItem, $routeParams, $document){
+        $document.duScrollTo(0, 30, 500, function (t) { return (--t)*t*t+1; });
         $scope.showEnlarged = false;
         $scope.curImage = 0;
         $scope.curEnlImage = 0;
+        var controlElms;
 
         $scope.enlargeImages = function(enlarge, index) {
             if (enlarge) {
                 $scope.showEnlarged = true;
+                $scope.isLocked = true;
                 $scope.curEnlImage = index;
+                if (!controlElms){
+                    controlElms = angular.element(document.querySelectorAll('.rn-carousel-controls, .rn-carousel-indicator, .fullsize-img'));
+                    controlElms.bind('click', function(ev){
+                        ev.preventDefault();
+                        ev.stopPropagation();
+                    });
+                }
             } else {
                 $scope.showEnlarged = false;
+                $scope.isLocked = false;
             }
         };
 
@@ -50,6 +61,12 @@ angular.module('ualib.news')
                }
            }
        });
+
+        $scope.$on('$destroy', function(){
+            if (controlElms){
+                controlElms.unbind('click');
+            }
+        });
     }])
 
     .directive('newsCard', [function(){

@@ -20,12 +20,22 @@
         <div class="media animate-repeat" ng-repeat="item in news | filter:{type: newsFilters.type}
                                                                   | filter:newsFilters.search
                                                                   | orderBy:['-sticky','-created']">
+            <div class="media-left hidden-sm hidden-xs">
+                <a ng-href="#/news-exhibits/{{item.link}}" class="news-list-tb">
+                    <img class="media-object" ng-src="{{item.tb}}" ng-if="item.tb" />
+                    <span class="media-object"
+                          ng-if="item.type == 0 && !item.tb"><span class="fa fa-newspaper-o"></span></span>
+                    <span class="media-object"
+                          ng-if="item.type == 1 && !item.tb"><span class="fa fa-calendar"></span></span>
+                </a>
+            </div>
             <div class="media-body">
-                <h4 class="media-heading">
+                <h3 class="media-heading">
                     <a ng-href="#/news-exhibits/{{item.link}}" ng-bind-html="item.title | highlight:newsFilters.search"></a>
-                    <small ng-if="item.type > 0">{{item.activeFrom | date:mediumDate}} - {{item.activeUntil | date:mediumDate}}</small>
-                    <small ng-if="item.type < 1">{{item.created | date:mediumDate}}</small>
-                </h4>
+                </h3>
+
+                <h5 class="text-muted" ng-if="item.type > 0">Exhibit {{item.activeFrom | date:mediumDate}} - {{item.activeUntil | date:mediumDate}}</h5>
+                <h5 class="text-muted" ng-if="item.type < 1">Created on {{item.created | date:mediumDate}}</h5>
                 <p class="text-justify">
                     <span ng-bind-html="item.blurb | highlight:newsFilters.search">
                     </span>
