@@ -1,6 +1,6 @@
 {
   "name": "ualib.news",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "homepage": "https://github.com/ualibweb/news_ui",
   "main": [
     "dist/ualib.news.js",
@@ -21,7 +21,7 @@
   "dependencies": {
     "angular-filter": "~0.5.5",
     "angular-ui-utils": "~0.2.3",
-    "angular-carousel": "~0.3.12",
+    "angular-carousel": "0.3.12",
     "angular-scroll": "~0.7.0"
   },
   "devDependencies": {
