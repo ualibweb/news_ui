@@ -6,9 +6,7 @@ angular.module('ualib.news', [
     'angular.filter',
     'duScroll',
     'ui.bootstrap',
-    'ui.utils',
+    'angular-carousel',
     'ualib.ui',
-    'ualib.hours',
-    'ualib.news.templates',
-    'angular-carousel'
+    'ualib.news.templates'
 ]);

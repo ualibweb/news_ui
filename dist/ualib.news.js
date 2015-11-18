@@ -214,11 +214,9 @@ angular.module("today/news-today.tpl.html", []).run(["$templateCache", function(
     'angular.filter',
     'duScroll',
     'ui.bootstrap',
-    'ui.utils',
+    'angular-carousel',
     'ualib.ui',
-    'ualib.hours',
-    'ualib.news.templates',
-    'angular-carousel'
+    'ualib.news.templates'
 ]);;angular.module('ualib.news')
 
     .factory('ualibNewsFactory', ['$resource', '$sce', '$filter', '$http', function($resource, $sce, $filter, $http){
