@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="media-body">
-        <h4 class="media-heading" ng-bind-html="newsCard.title"></h4>
-        <p ng-bind-html="newsCard.blurb"></p>
+        <h4 class="media-heading" ng-bind-html="newsCard.title | truncate:50:'...':true"></h4>
+        <p ng-bind-html="newsCard.blurb | truncate:150:'...':true"></p>
     </div>
 </a>
