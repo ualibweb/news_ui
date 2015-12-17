@@ -36,150 +36,158 @@ angular.module("news-item/news-card.tpl.html", []).run(["$templateCache", functi
 
 angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("news-item/news-item.tpl.html",
-    "<div class=\"page-header\">\n" +
-    "    <h1>{{newsItem.title}}</h1>\n" +
-    "</div>\n" +
-    "<div class=\"row\">\n" +
-    "    <div class=\"col-md-4 col-md-push-8\">\n" +
-    "        <div class=\"well\" ng-if=\"newsItem.contactName\">\n" +
-    "            <h4>For more information contact</h4>\n" +
-    "            <ul class=\"fa-ul\">\n" +
-    "                <li><span class=\"fa fa-user fa-li\"></span>{{newsItem.contactName}}</li>\n" +
-    "                <li><span class=\"fa fa-phone fa-li\"></span>{{newsItem.contactPhone}}</li>\n" +
-    "                <li><span class=\"fa fa-envelope fa-li\"></span>{{newsItem.contactEmail}}</li>\n" +
-    "            </ul>\n" +
-    "        </div>\n" +
-    "        <a href=\"#/news-exhibits\" class=\"btn btn-default\"><span class=\"fa fa-reply\"></span> See all news &amp; exhibits</a>\n" +
+    "<div class=\"container\">\n" +
+    "    <div class=\"page-header\">\n" +
+    "        <h1>{{newsItem.title}}</h1>\n" +
     "    </div>\n" +
-    "    <div class=\"col-md-8 col-md-pull-4\">\n" +
-    "        <div class=\"text-center news-carousel-container-small\" ng-if=\"newsItem.images.length > 0\">\n" +
-    "            <ul rn-carousel rn-carousel-auto-slide rn-carousel-buffered\n" +
-    "                rn-carousel-index=\"curImage\" rn-carousel-locked=\"isLocked\"\n" +
-    "                class=\"image news-carousel-small\">\n" +
-    "                <li ng-repeat=\"img in newsItem.images\">\n" +
-    "                    <div class=\"layer text-center\">\n" +
-    "                        <div class=\"news-carousel-image-small\"\n" +
-    "                             ng-style=\"{'background-image':'url('+img+')'}\" ng-click=\"enlargeImages(true, $index)\">\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"col-md-4 col-md-push-8\">\n" +
+    "            <div class=\"well\" ng-if=\"newsItem.contactName\">\n" +
+    "                <h4>For more information contact</h4>\n" +
+    "                <ul class=\"fa-ul\">\n" +
+    "                    <li><span class=\"fa fa-user fa-li\"></span>{{newsItem.contactName}}</li>\n" +
+    "                    <li><span class=\"fa fa-phone fa-li\"></span>{{newsItem.contactPhone}}</li>\n" +
+    "                    <li><span class=\"fa fa-envelope fa-li\"></span>{{newsItem.contactEmail}}</li>\n" +
+    "                </ul>\n" +
+    "            </div>\n" +
+    "            <a href=\"#/news-exhibits\" class=\"btn btn-default\"><span class=\"fa fa-reply\"></span> See all news &amp; exhibits</a>\n" +
+    "        </div>\n" +
+    "        <div class=\"col-md-8 col-md-pull-4\">\n" +
+    "            <div class=\"text-center news-carousel-container-small\" ng-if=\"newsItem.images.length > 0\">\n" +
+    "                <ul rn-carousel rn-carousel-auto-slide rn-carousel-buffered\n" +
+    "                    rn-carousel-index=\"curImage\" rn-carousel-locked=\"isLocked\"\n" +
+    "                    class=\"image news-carousel-small\">\n" +
+    "                    <li ng-repeat=\"img in newsItem.images\">\n" +
+    "                        <div class=\"layer text-center\">\n" +
+    "                            <div class=\"news-carousel-image-small\"\n" +
+    "                                 ng-style=\"{'background-image':'url('+img+')'}\" ng-click=\"enlargeImages(true, $index)\">\n" +
+    "                            </div>\n" +
     "                        </div>\n" +
-    "                    </div>\n" +
+    "                    </li>\n" +
+    "                </ul>\n" +
+    "                <div rn-carousel-indicators ng-if=\"newsItem.images.length > 1\" slides=\"newsItem.images\" rn-carousel-index=\"curImage\">\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <h5 class=\"text-muted\">\n" +
+    "                <span>Created on {{newsItem.created | date:mediumDate}}</span>\n" +
+    "            </h5>\n" +
+    "            <p class=\"text-justify\" ng-bind-html=\"newsItem.description\"></p>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div ng-show=\"showEnlarged\">\n" +
+    "        <div class=\"carousel-lg\" ng-click=\"enlargeImages(false)\">\n" +
+    "            <button type=\"button\" class=\"close\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n" +
+    "            <ul rn-carousel rn-carousel-controls rn-carousel-index=\"curEnlImage\" class=\"image\">\n" +
+    "                <li ng-repeat=\"img in newsItem.images\">\n" +
+    "                    <div class=\"layer\"><img class=\"fullsize-img\" ng-src=\"{{img}}\" ng-click=\"nextSlide()\"/></div>\n" +
     "                </li>\n" +
     "            </ul>\n" +
-    "            <div rn-carousel-indicators ng-if=\"newsItem.images.length > 1\" slides=\"newsItem.images\" rn-carousel-index=\"curImage\">\n" +
-    "            </div>\n" +
+    "            <div class=\"text-center\" rn-carousel-indicators ng-if=\"newsItem.images.length > 1\" slides=\"newsItem.images\" rn-carousel-index=\"curEnlImage\"></div>\n" +
+    "\n" +
     "        </div>\n" +
-    "        <h5 class=\"text-muted\">\n" +
-    "            <span>Created on {{newsItem.created | date:mediumDate}}</span>\n" +
-    "        </h5>\n" +
-    "        <p class=\"text-justify\" ng-bind-html=\"newsItem.description\"></p>\n" +
-    "    </div>\n" +
-    "</div>\n" +
-    "<div ng-show=\"showEnlarged\">\n" +
-    "    <div class=\"carousel-lg\" ng-click=\"enlargeImages(false)\">\n" +
-    "        <button type=\"button\" class=\"close\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n" +
-    "        <ul rn-carousel rn-carousel-controls rn-carousel-index=\"curEnlImage\" class=\"image\">\n" +
-    "            <li ng-repeat=\"img in newsItem.images\">\n" +
-    "                <div class=\"layer\"><img class=\"fullsize-img\" ng-src=\"{{img}}\" ng-click=\"nextSlide()\"/></div>\n" +
-    "            </li>\n" +
-    "        </ul>\n" +
-    "        <div class=\"text-center\" rn-carousel-indicators ng-if=\"newsItem.images.length > 1\" slides=\"newsItem.images\" rn-carousel-index=\"curEnlImage\"></div>\n" +
     "\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <!--<div class=\"news-carousel-container-large\">-->\n" +
+    "        <!--<div class=\"news-carousel-container-large\">-->\n" +
     "        <!--<ul rn-carousel rn-carousel-controls rn-carousel-buffered-->\n" +
-    "            <!--rn-carousel-index=\"curEnlImage\" rn-carousel-transition=\"none\"-->\n" +
-    "            <!--class=\"image news-carousel-large\" rn-carousel-controls-allow-loop>-->\n" +
-    "            <!--<li ng-repeat=\"img in newsItem.images\">-->\n" +
-    "                <!--<div class=\"layer text-center\">-->\n" +
-    "                    <!--<div class=\"news-carousel-image-large\"-->\n" +
-    "                         <!--ng-style=\"{'background-image':'url('+img+')'}\" ng-click=\"setCurEnlImage($event, $index)\">-->\n" +
-    "                    <!--</div>-->\n" +
-    "                <!--</div>-->\n" +
-    "            <!--</li>-->\n" +
+    "        <!--rn-carousel-index=\"curEnlImage\" rn-carousel-transition=\"none\"-->\n" +
+    "        <!--class=\"image news-carousel-large\" rn-carousel-controls-allow-loop>-->\n" +
+    "        <!--<li ng-repeat=\"img in newsItem.images\">-->\n" +
+    "        <!--<div class=\"layer text-center\">-->\n" +
+    "        <!--<div class=\"news-carousel-image-large\"-->\n" +
+    "        <!--ng-style=\"{'background-image':'url('+img+')'}\" ng-click=\"setCurEnlImage($event, $index)\">-->\n" +
+    "        <!--</div>-->\n" +
+    "        <!--</div>-->\n" +
+    "        <!--</li>-->\n" +
     "        <!--</ul>-->\n" +
     "        <!--<div rn-carousel-indicators ng-if=\"newsItem.images.length > 1\" slides=\"newsItem.images\" rn-carousel-index=\"curEnlImage\">-->\n" +
     "        <!--&lt;!&ndash;<div class=\"news-carousel-large-indicators text-center\" ng-if=\"newsItem.images.length > 1\">&ndash;&gt;-->\n" +
-    "            <!--&lt;!&ndash;<span ng-repeat=\"img in newsItem.images\" class=\"clickable-item\"&ndash;&gt;-->\n" +
-    "                  <!--&lt;!&ndash;ng-click=\"setCurEnlImage($event, $index)\">&ndash;&gt;-->\n" +
-    "                <!--&lt;!&ndash;<span class=\"fa fa-2x fa-circle-o\" ng-class=\"{'fa-3x': $index == $parent.curEnlImage}\">&ndash;&gt;-->\n" +
-    "                <!--&lt;!&ndash;</span>&ndash;&gt;-->\n" +
-    "            <!--&lt;!&ndash;</span>&ndash;&gt;-->\n" +
+    "        <!--&lt;!&ndash;<span ng-repeat=\"img in newsItem.images\" class=\"clickable-item\"&ndash;&gt;-->\n" +
+    "        <!--&lt;!&ndash;ng-click=\"setCurEnlImage($event, $index)\">&ndash;&gt;-->\n" +
+    "        <!--&lt;!&ndash;<span class=\"fa fa-2x fa-circle-o\" ng-class=\"{'fa-3x': $index == $parent.curEnlImage}\">&ndash;&gt;-->\n" +
+    "        <!--&lt;!&ndash;</span>&ndash;&gt;-->\n" +
+    "        <!--&lt;!&ndash;</span>&ndash;&gt;-->\n" +
     "        <!--&lt;!&ndash;</div>&ndash;&gt;-->\n" +
-    "    <!--</div>-->\n" +
+    "        <!--</div>-->\n" +
+    "    </div>\n" +
     "</div>\n" +
     "");
 }]);
 
 angular.module("news/news-list.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("news/news-list.tpl.html",
-    "<div class=\"jumbotron bg-transparent\">\n" +
-    "    <div class=\"row\">\n" +
-    "        <div class=\"col-md-7\">\n" +
-    "            <h1>News &amp; Exhibits</h1>\n" +
-    "        </div>\n" +
-    "        <div class=\"col-md-5\">\n" +
-    "            <div class=\"well\">\n" +
-    "                <p class=\"lead\">Looking for upcoming events in the University Libraries?</p>\n" +
-    "                <a href=\"http://events.ua.edu/category/22/\" class=\"btn btn-primary\" target=\"_new\">View event calendar <span class=\"fa fa-external-link\"></span></a>\n" +
+    "<div class=\"jumbotron-header\">\n" +
+    "    <div class=\"jumbotron\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-7\">\n" +
+    "                    <h1>News &amp; Exhibits</h1>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-5\">\n" +
+    "                    <div class=\"well\">\n" +
+    "                        <p class=\"lead\">Looking for upcoming events in the University Libraries?</p>\n" +
+    "                        <a href=\"http://events.ua.edu/category/22/\" class=\"btn btn-primary\" target=\"_new\">View event calendar <span class=\"fa fa-external-link\"></span></a>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +
     "\n" +
     "\n" +
-    "<div class=\"row\">\n" +
-    "    <div class=\"col-md-9\">\n" +
+    "<div class=\"container\">\n" +
+    "    <div class=\"row\">\n" +
+    "        <div class=\"col-md-9\">\n" +
     "\n" +
-    "        <div class=\"media animate-repeat\" ng-repeat=\"item in news | filter:{type: newsFilters.type}\n" +
+    "            <div class=\"media animate-repeat\" ng-repeat=\"item in news | filter:{type: newsFilters.type}\n" +
     "                                                                  | filter:newsFilters.search\n" +
     "                                                                  | orderBy:['-sticky','-created']\">\n" +
-    "            <div class=\"media-left hidden-sm hidden-xs\">\n" +
-    "                <a ng-href=\"#/news-exhibits/{{item.link}}\" class=\"news-list-tb\">\n" +
-    "                    <img class=\"media-object\" ng-src=\"{{item.tb}}\" ng-if=\"item.tb\" />\n" +
+    "                <div class=\"media-left hidden-sm hidden-xs\">\n" +
+    "                    <a ng-href=\"#/news-exhibits/{{item.link}}\" class=\"news-list-tb\">\n" +
+    "                        <img class=\"media-object\" ng-src=\"{{item.tb}}\" ng-if=\"item.tb\" />\n" +
     "                    <span class=\"media-object\"\n" +
     "                          ng-if=\"item.type == 0 && !item.tb\"><span class=\"fa fa-newspaper-o\"></span></span>\n" +
     "                    <span class=\"media-object\"\n" +
     "                          ng-if=\"item.type == 1 && !item.tb\"><span class=\"fa fa-calendar\"></span></span>\n" +
-    "                </a>\n" +
-    "            </div>\n" +
-    "            <div class=\"media-body\">\n" +
-    "                <h3 class=\"media-heading\">\n" +
-    "                    <a ng-href=\"#/news-exhibits/{{item.link}}\" ng-bind-html=\"item.title | highlight:newsFilters.search\"></a>\n" +
-    "                </h3>\n" +
+    "                    </a>\n" +
+    "                </div>\n" +
+    "                <div class=\"media-body\">\n" +
+    "                    <h3 class=\"media-heading\">\n" +
+    "                        <a ng-href=\"#/news-exhibits/{{item.link}}\" ng-bind-html=\"item.title | highlight:newsFilters.search\"></a>\n" +
+    "                    </h3>\n" +
     "\n" +
-    "                <h5 class=\"text-muted\" ng-if=\"item.type > 0\">Exhibit {{item.activeFrom | date:mediumDate}} - {{item.activeUntil | date:mediumDate}}</h5>\n" +
-    "                <h5 class=\"text-muted\" ng-if=\"item.type < 1\">Created on {{item.created | date:mediumDate}}</h5>\n" +
-    "                <p class=\"text-justify\">\n" +
+    "                    <h5 class=\"text-muted\" ng-if=\"item.type > 0\">Exhibit {{item.activeFrom | date:mediumDate}} - {{item.activeUntil | date:mediumDate}}</h5>\n" +
+    "                    <h5 class=\"text-muted\" ng-if=\"item.type < 1\">Created on {{item.created | date:mediumDate}}</h5>\n" +
+    "                    <p class=\"text-justify\">\n" +
     "                    <span ng-bind-html=\"item.blurb | highlight:newsFilters.search\">\n" +
     "                    </span>\n" +
-    "                </p>\n" +
+    "                    </p>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"text-center\">\n" +
+    "                <pagination total-items=\"filteredNews.length\" ng-model=\"soft.page\" max-size=\"10\" class=\"pagination-sm\" boundary-links=\"true\" items-per-page=\"soft.perPage\" ng-change=\"update()\" ng-if=\"filteredNews.length > soft.perPage\"></pagination>\n" +
+    "            </div>\n" +
+    "\n" +
+    "            <div class=\"alert alert-warning text-center\" role=\"alert\" ng-show=\"news.length < 1\">\n" +
+    "                <h2>\n" +
+    "                    No\n" +
+    "                    <span ng-show=\"newsFilters.type == ''\">News or Exhibits</span>\n" +
+    "                    <span ng-show=\"newsFilters.type == '0'\">News</span>\n" +
+    "                    <span ng-show=\"newsFilters.type == '1'\">Exhibits</span>\n" +
+    "                    match the search \"<strong>{{newsFilters.search}}</strong>\"</span>\n" +
+    "                </h2>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"text-center\">\n" +
-    "            <pagination total-items=\"filteredNews.length\" ng-model=\"soft.page\" max-size=\"10\" class=\"pagination-sm\" boundary-links=\"true\" items-per-page=\"soft.perPage\" ng-change=\"update()\" ng-if=\"filteredNews.length > soft.perPage\"></pagination>\n" +
+    "        <div class=\"col-md-3 hidden-xs\">\n" +
+    "            <h4>Filters</h4>\n" +
+    "            <form class=\"facets-form\">\n" +
+    "                <div class=\"form-group\">\n" +
+    "                    <input type=\"text\" class=\"form-control\" ng-model=\"newsFilters.search\" placeholder=\"Keyword search\">\n" +
+    "                </div>\n" +
+    "            </form>\n" +
     "        </div>\n" +
     "\n" +
-    "        <div class=\"alert alert-warning text-center\" role=\"alert\" ng-show=\"news.length < 1\">\n" +
-    "            <h2>\n" +
-    "                No\n" +
-    "                <span ng-show=\"newsFilters.type == ''\">News or Exhibits</span>\n" +
-    "                <span ng-show=\"newsFilters.type == '0'\">News</span>\n" +
-    "                <span ng-show=\"newsFilters.type == '1'\">Exhibits</span>\n" +
-    "                match the search \"<strong>{{newsFilters.search}}</strong>\"</span>\n" +
-    "            </h2>\n" +
-    "        </div>\n" +
     "    </div>\n" +
-    "\n" +
-    "    <div class=\"col-md-3 hidden-xs\">\n" +
-    "        <h4>Filters</h4>\n" +
-    "        <form class=\"facets-form\">\n" +
-    "            <div class=\"form-group\">\n" +
-    "                <input type=\"text\" class=\"form-control\" ng-model=\"newsFilters.search\" placeholder=\"Keyword search\">\n" +
-    "            </div>\n" +
-    "        </form>\n" +
-    "    </div>\n" +
-    "\n" +
     "</div>");
 }]);
 
