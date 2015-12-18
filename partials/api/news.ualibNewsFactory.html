@@ -1,0 +1,70 @@
+<a href="https://github.com/ualibweb/news_ui/edit/master/src/common/news-factory.js" class="improve-docs"><i class="icon-edit"> </i>Improve this doc</a><a href="https://github.com/ualibweb/news_ui/blob/98afd7d/src/common/news-factory.js#L12" class="view-source"><i class="icon-eye-open"> </i>View source</a><h1><code ng:non-bindable="">ualibNewsFactory</code>
+<div><span class="hint">service in module <code ng:non-bindable="">news</code>
+</span>
+</div>
+</h1>
+<div><h2 id="dependencies">Dependencies</h2>
+<ul class="dependencies"><li><code ng:non-bindable=""><a href="#/api/ng.$resource">$resource</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/ng.$sce">$sce</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/ng.$filters">$filters</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/ng.$http">$http</a></code>
+</li>
+</ul>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><a href="https://github.com/ualibweb/news_ui/blob/98afd7d/src/common/news-factory.js#L74" class="view-source icon-eye-open"> </a><h3 id="methods_appendtransform">appendTransform(defaults, transform)</h3>
+<div class="appendtransform"><div class="news-ualibnewsfactory-appendtransform-page"><p><span class="label label-warning">Private</span>
+Extend the default responseTransform array - Straight from Angular 1.2.8 API docs - <a href="https://docs.angularjs.org/api/ng/service/$http#overriding-the-default-transformations-per-request">https://docs.angularjs.org/api/ng/service/$http#overriding-the-default-transformations-per-request</a></p>
+<p>Doing this allows custom modifications of the JSON response from the API to be cached after the initial <code>$resource</code> call, instead of
+performing these modifications on every <code>$digest()</code> cycle (e.g., make modifications once, instead of every time the news list is refreshed).</p>
+</div><h5 id="methods_appendtransform_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>defaults</td><td><a href="" class="label type-hint type-hint-array">Array.&lt;function()&gt;</a></td><td><div class="news-ualibnewsfactory-appendtransform-page"><p>Default <code>Array</code> of <code>$http</code> transform response transform functions from Angular - will always be <code>$http.defaults.transformResponse</code></p>
+</div></td></tr><tr><td>transform</td><td><a href="" class="label type-hint type-hint-function">function()</a></td><td><div class="news-ualibnewsfactory-appendtransform-page"><p>Transform function to extend the <code>$http.defaults.transformResponse</code> Array with.</p>
+</div></td></tr></tbody></table><h5 id="methods_appendtransform_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-array">Array.&lt;function()&gt;</a></td><td><div class="news-ualibnewsfactory-appendtransform-page"><p>Returns the new <code>transformResponse</code> Array</p>
+</div></td></tr></table></div>
+</li>
+<li><a href="https://github.com/ualibweb/news_ui/blob/98afd7d/src/common/news-factory.js#L112" class="view-source icon-eye-open"> </a><h3 id="methods_get">get(params)</h3>
+<div class="get"><h5 id="methods_get_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>params <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">object.&lt;string&gt;</a></td><td><div class="news-ualibnewsfactory-page news-ualibnewsfactory-get-page"><p>REST params object to send to the API</p>
+</div><table><thead><tr><th>Property</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>news</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="news-ualibnewsfactory-page news-ualibnewsfactory-get-page"><p>News list identifier</p>
+<p>Available <code>identifiers</code>:</p>
+<ul>
+<li><code>archive</code> - Retrieves all news items from the API.</li>
+</ul>
+</div></td></tr></tbody></table></td></tr></tbody></table><h5 id="methods_get_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="news-ualibnewsfactory-page news-ualibnewsfactory-get-page"><p>Returns a <a href="https://code.angularjs.org/1.2.29/docs/api/ng/service/$q">promise</a>.</p>
+</div></td></tr></table><h4 id="methods_get_example">Example</h4>
+<div class="example"><div class="news-ualibnewsfactory-page news-ualibnewsfactory-get-page"><pre class="prettyprint linenums">
+ualibNewsFactory.get({news: 'archive'})
+   .$promise
+   .then(function(data){
+       $scope.news = data;
+   }, function(data, status, headers, config) {
+       console.log({
+           data: data,
+           status: status,
+           headers: headers,
+           config: config
+       });
+   });
+</pre>
+</div></div>
+</div>
+</li>
+<li><a href="https://github.com/ualibweb/news_ui/blob/98afd7d/src/common/news-factory.js#L133" class="view-source icon-eye-open"> </a><h3 id="methods_today">today()</h3>
+<div class="today"><div class="news-ualibnewsfactory-page news-ualibnewsfactory-today-page"><p>Retrieves <em>current</em> news items from the API and upcoming events from the <a href="http://events.ua.edu/category/22/">UA Events Calendar</a>.</p>
+</div><h5 id="methods_today_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="news-ualibnewsfactory-page news-ualibnewsfactory-today-page"><p>Returns a <a href="https://code.angularjs.org/1.2.29/docs/api/ng/service/$q">promise</a>.</p>
+</div></td></tr></table><h4 id="methods_today_example">Example</h4>
+<div class="example"><div class="news-ualibnewsfactory-page news-ualibnewsfactory-today-page"><pre class="prettyprint linenums">
+ualibNewsFactory.today()
+     .$promise
+     .then(function(data){
+            $scope.news = data.news;
+            $scope.events = data.events;
+        });
+</pre>
+</div></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
