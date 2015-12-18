@@ -133,6 +133,28 @@ module.exports = function(grunt) {
                 ],
                 tasks: ['jshint', 'concat']
             }
+        },
+        ngdocs: {
+            options: {
+                dest: 'docs',
+                html5Mode: false,
+                startPage: 'api',
+                sourceLink: true,
+                title: "News UI Docs",
+                titleLink: "#/api"
+            },
+            api: {
+                src: ['src/**/*.js', '!src/**/*.spec.js'],
+                title: 'API Documentation'
+            }
+        },
+        'gh-pages': {
+            options: {
+                base: 'docs'
+            },
+            firstTarget: {
+                src: ['**/*']
+            }
         }
     });
 

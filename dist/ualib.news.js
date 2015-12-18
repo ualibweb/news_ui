@@ -36,9 +36,27 @@ angular.module("news-item/news-card.tpl.html", []).run(["$templateCache", functi
 
 angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("news-item/news-item.tpl.html",
+    "<div class=\"jumbotron-header\">\n" +
+    "    <div class=\"jumbotron\">\n" +
+    "        <div class=\"container\">\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-7\">\n" +
+    "                    <h1>News &amp; Exhibits</h1>\n" +
+    "                </div>\n" +
+    "                <div class=\"col-sm-5\">\n" +
+    "                    <div class=\"well\">\n" +
+    "                        <p class=\"lead\">Looking for upcoming events in the University Libraries?</p>\n" +
+    "                        <a href=\"http://events.ua.edu/category/22/\" class=\"btn btn-primary\" target=\"_new\">View event calendar <span class=\"fa fa-external-link\"></span></a>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "\n" +
     "<div class=\"container\">\n" +
     "    <div class=\"page-header\">\n" +
-    "        <h1>{{newsItem.title}}</h1>\n" +
+    "        <h2>{{newsItem.title}}</h2>\n" +
     "    </div>\n" +
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-4 col-md-push-8\">\n" +
@@ -214,7 +232,83 @@ angular.module("today/news-today.tpl.html", []).run(["$templateCache", function(
     "\n" +
     "</div>");
 }]);
-;angular.module('ualib.news', [
+;/**
+ * @ngdoc overview
+ * @name index
+ * @description
+ * # Quick Start
+ *
+ * Run the following commands to install:
+ *
+ * ```shell
+ * npm install
+ * bower install
+ * ```
+ *
+ * <div class="alert alert-warning">
+ *     If you are unfamiliar with **Node.js**, **Grunt**, or **Bower** tools *or* have not installed them on your computer,
+ *     read through the instructions in the [Getting Started](#getting-started) section.
+ * </div>
+ *
+ * # Getting Started
+ *
+ * This package requires[Node.js](http://nodejs.org/) - an application platform which many development and automation tools may be run.
+ * Download [Node.js](http://nodejs.org/download/) and install it on your computer.
+ *
+ * > The **Node.js** platform is used to run development tools such as [Grunt](#getting-started_install-grunt) and [Bower](#getting-started_install-bower)
+ *
+ * Once `Node.js` is installed, use the `npm` (node package manager) command to install this project's node dependencies:
+ *
+ * ```shell
+ * npm install
+ * ```
+ *
+ * <div class="alert alert-info">
+ *     When the [npm install](https://docs.npmjs.com/cli/install) command is run without a package (e.g., `npm install <package_name>`),
+ *     it installs dependencies listed in the `package.json` file (located in the root directory of this project).
+ * </div>
+ *
+ *
+ * ## Install Grunt
+ * *This package requires Grunt `~0.4.5`*
+ *
+ * If you have not already installed `Grunt` on your computer, use the following command to install the `Grunt Command Line Interface (grunt-cli)`:
+ *
+ * ```shell
+ * npm install -g grunt-cli
+ * ```
+ * <div class="alert alert-info">
+ *     The **-g** option installs `grunt-cli` globally on you computer. You only need to run this command once.
+ * </div>
+ *
+ * > If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide,
+ * > as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins.
+ *
+ *
+ * ## Install Bower
+ *
+ * If `Bower` is not globally installed on your computer, run the following command:
+ *
+ * ```shell
+ * npm install -g bower
+ * ```
+ *
+ * [Bower](http://bower.io/) is also a package manager for front-end web frameworks such as jQuery, Angular, and Bootstrap.
+ * This project uses Bower to manage front-end third-party and peer dependencies.
+ *
+ * Once installed, you can download this project's `Bower` dependencies with the following command:
+ *
+ * ```shell
+ * bower install
+ * ```
+ *
+ * <div class="alert alert-info">
+ *     Similar to `npm install` if `Bower's install` command is not given a package name (e.g., `bower install <package_name>`), it will install
+ *     dependencies listed in the `bower.json` config file.
+ * </div>
+ */
+
+angular.module('ualib.news', [
     'ngRoute',
     'ngResource',
     'ngSanitize',
@@ -226,6 +320,16 @@ angular.module("today/news-today.tpl.html", []).run(["$templateCache", function(
     'ualib.ui',
     'ualib.news.templates'
 ]);;angular.module('ualib.news')
+
+    /**
+     * @ngdoc service
+     * @name news.ualibNewsFactory
+     *
+     * @requires $resource
+     * @requires $sce
+     * @requires $filters
+     * @requires $http
+     */
 
     .factory('ualibNewsFactory', ['$resource', '$sce', '$filter', '$http', function($resource, $sce, $filter, $http){
 
@@ -270,6 +374,24 @@ angular.module("today/news-today.tpl.html", []).run(["$templateCache", function(
 
         //TODO: centralize this function so it can be used with all apps
         // Extend the default responseTransform array - Straight from Angular 1.2.8 API docs - https://docs.angularjs.org/api/ng/service/$http#overriding-the-default-transformations-per-request
+        
+        /**
+         * @ngdoc function
+         * @name news.ualibNewsFactory#appendTransform
+         * @methodOf news.ualibNewsFactory
+         *
+         * @param {Array.<function()>} defaults Default `Array` of `$http` transform response transform functions from Angular - will always be `$http.defaults.transformResponse`
+         * @param {function()} transform Transform function to extend the `$http.defaults.transformResponse` Array with.
+         *
+         * @description
+         * <span class="label label-warning">Private</span>
+         * Extend the default responseTransform array - Straight from Angular 1.2.8 API docs - https://docs.angularjs.org/api/ng/service/$http#overriding-the-default-transformations-per-request
+         *
+         * Doing this allows custom modifications of the JSON response from the API to be cached after the initial `$resource` call, instead of
+         * performing these modifications on every `$digest()` cycle (e.g., make modifications once, instead of every time the news list is refreshed).
+         *
+         * @returns {Array.<function()>} Returns the new `transformResponse` Array
+         */
         function appendTransform(defaults, transform) {
 
             // We can't guarantee that the default transformation is an array1
@@ -278,6 +400,57 @@ angular.module("today/news-today.tpl.html", []).run(["$templateCache", function(
             // Append the new transformation to the defaults
             return defaults.concat(transform);
         }
+
+        /**
+         * @ngdoc method
+         * @name news.ualibNewsFactory:get
+         * @methodOf news.ualibNewsFactory
+         *
+         * @param {object.<string>=} params REST params object to send to the API
+         * @param {string} params.news News list identifier
+         *
+         * Available `identifiers`:
+         * - `archive` - Retrieves all news items from the API.
+         *
+         * @example
+         * <pre>
+         ualibNewsFactory.get({news: 'archive'})
+            .$promise
+            .then(function(data){
+                $scope.news = data;
+            }, function(data, status, headers, config) {
+                console.log({
+                    data: data,
+                    status: status,
+                    headers: headers,
+                    config: config
+                });
+            });
+         * </pre>
+         *
+         * @returns {Promise} Returns a [promise](https://code.angularjs.org/1.2.29/docs/api/ng/service/$q).
+         */
+
+        /**
+         * @ngdoc method
+         * @name news.ualibNewsFactory:today
+         * @methodOf news.ualibNewsFactory
+         *
+         * @description
+         * Retrieves *current* news items from the API and upcoming events from the [UA Events Calendar](http://events.ua.edu/category/22/).
+         *
+         * @example
+         * <pre>
+         *     ualibNewsFactory.today()
+         .$promise
+         .then(function(data){
+                $scope.news = data.news;
+                $scope.events = data.events;
+            });
+         * </pre>
+         *
+         * @returns {Promise} Returns a [promise](https://code.angularjs.org/1.2.29/docs/api/ng/service/$q).
+         */
 
         return $resource('//wwwdev2.lib.ua.edu/newsApp/api/:news', {}, {
             get: {
@@ -309,6 +482,20 @@ angular.module("today/news-today.tpl.html", []).run(["$templateCache", function(
             }
         });
     }]);;angular.module('ualib.news')
+
+    /**
+     * @ngdoc overview
+     * @name news.news-item
+     *
+     * @description
+     * #Route
+     *
+     * ```
+     * /#/news-exhibits/:news-item
+     * ```
+     *
+     *
+     */
 
     .config(['$routeProvider', function($routeProvider){
         $routeProvider
@@ -393,7 +580,26 @@ angular.module("today/news-today.tpl.html", []).run(["$templateCache", function(
                 return 'news-item/' + type + '-card.tpl.html';
             }
         };
-    }]);;angular.module('ualib.news')
+    }]);;/**
+ * @ngdoc overview
+ * @name news
+ * 
+ * @requires  ngRoute
+ * @requires ngResource
+ * @requires ngSanitize
+ * @requires ngAnimate
+ * @requires angular.filter
+ * @requires duScroll
+ * @requires ui.bootstrap
+ * @requires angular-carousel
+ * @requires ualib.ui
+ *
+ * @description
+ * News and Events web app
+ *
+ * **default route: [/#/news-exhibits](http://www.lib.ua.edu/#/news-exhibits/)**
+ */
+angular.module('ualib.news')
 
     .config(['$routeProvider', function($routeProvider){
         $routeProvider
@@ -419,13 +625,44 @@ angular.module("today/news-today.tpl.html", []).run(["$templateCache", function(
             });
     }])
 
+    /**
+     * @ngdoc controller
+     * @name news.Controller:newsListCtrl
+     *
+     * @requires $scope
+     * @requires $location
+     * @requires news.ualibNewsFactory
+     *
+     * @description
+     * Controller for the News and Exhibits web app route
+     *
+     */
+
     .controller('newsListCtrl', ['$scope', '$location', 'newsList', function($scope, $location, newsList){
         var filterWatcher;
+        /**
+         * @ngdoc object
+         * @name news.Controller:newsListCtrl:$scope.newsFilter
+         * @propertyOf news.Controller:newsListCtrl
+         * @type {Object.<string>}
+         *
+         * @description
+         * `$scope` object for the news list filters
+         */
         $scope.newsFilters = {
             sort: 'created',
             type: '',
             search: ''
         };
+
+        /**
+         * @ngdoc object
+         * @name news.Controller:newsListCtrl:$scope.news
+         * @propertyOf news.Controller:newsListCtrl
+         *
+         * @description
+         * `$scope` variable for the list of news items return from the API via the {@link news.ualibNewsFactory ualibNewsFactory} service.
+         */
 
         newsList.$promise.then(function(data){
             $scope.news = data.news;
@@ -444,6 +681,16 @@ angular.module("today/news-today.tpl.html", []).run(["$templateCache", function(
         //TODO: will need to replace highlight filter by a custom one
         // if we use item.description instead of item.blurb
 
+        /**
+         * @ngdoc function
+         * @name news.Controller:newsListCtrl#paramsToScope
+         * @methodOf news.Controller:newsListCtrl
+         *
+         * @description
+         * <span class="label label-danger">private</span>
+         *
+         * Function to bind `URI query params` to `$scope.newsFilters`.
+         */
         function paramsToScope(){
             var params = $location.search();
             for (var param in params){
@@ -453,6 +700,16 @@ angular.module("today/news-today.tpl.html", []).run(["$templateCache", function(
             }
         }
 
+        /**
+         * @ngdoc function
+         * @name news.Controller:newsListCtrl#processFilters
+         * @methodOf news.Controller:newsListCtrl
+         *
+         * @description
+         * <span class="label label-danger">private</span>
+         *
+         * Function to bind `$scope.newsFilters` to `URI query params`.
+         */
         function processFilters(){
             var f = $scope.newsFilters;
             var params = $location.search();
