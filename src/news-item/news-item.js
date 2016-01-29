@@ -60,12 +60,65 @@ angular.module('ualib.news')
      * Route controller when viewing individual news items
      */
 
-    .controller('newsItemCtrl', ['$scope', 'newsItem', '$routeParams', '$document', function($scope, newsItem, $routeParams, $document){
+    .controller('newsItemCtrl', ['$scope', 'newsItem', '$routeParams', '$document', '$q', function($scope, newsItem, $routeParams, $document, $q){
         $document.duScrollTo(0, 30, 500, function (t) { return (--t)*t*t+1; });
         $scope.showEnlarged = false;
         $scope.curImage = 0;
         $scope.curEnlImage = 0;
         var controlElms;
+        var cssRules = [];
+
+        function loadImage(src){
+            var deferred = $q.defer();
+            var image = new Image();
+
+            image.onload = function(){
+                image.styles = 'url('+image.src+')';
+                if (image.width < image.height){
+                    image.styles += ',linear-gradient(to right, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.4) 100%),url('+image.src+')';
+                }
+                deferred.resolve(image);
+            };
+
+            image.src = src;
+            return deferred.promise;
+        }
+
+        function loadImages(item, i, len, deferred){
+            i = i ? i :0;
+            len = len ? len : item.images.length;
+            deferred = deferred ? deferred : $q.defer();
+
+            if (len < 1){
+                deferred.resolve(item);
+            }
+
+            var image = new Image();
+
+            image.onload = function(){
+                this.styles = 'url('+this.src+')';
+
+                if (this.width/this.height < 1.35){
+                    var index = document.styleSheets[0].insertRule('.news-carousel-image-small:nth-child('+(i+1)+'):before{ background-image: url('+this.src+'); }');
+                    cssRules.push(index);
+                    //this.styles += ',linear-gradient(to right, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.65) 100%)';
+                    this.isPortrait = true;
+                }
+                item.images[i] = this;
+
+                if (i+1 === len){
+                    deferred.resolve(item);
+                }
+                else {
+                    i++;
+                    loadImages(item, i, len, deferred);
+                }
+            };
+
+            image.src = item.images[i];
+
+            return deferred.promise;
+        }
 
         /**
          * @ndgoc method
@@ -112,18 +165,29 @@ angular.module('ualib.news')
         };
 
        newsItem.$promise.then(function(data){
+           var item = null;
            for (var i = 0, len = data.news.length; i < len; i++){
-               var item = data.news[i];
-               if (item.hasOwnProperty('link') && item.link === $routeParams.link){
-                   $scope.newsItem = item;
+               item = data.news[i];
+               if (item.link && item.link === $routeParams.link){
+                   break;
                }
            }
+
+           loadImages(item).then(function(newsItem){
+               console.log(newsItem);
+               $scope.newsItem = newsItem;
+           });
        });
+
+
 
         $scope.$on('$destroy', function(){
             if (controlElms){
                 controlElms.unbind('click');
             }
+            cssRules.forEach(function(ruleIndex){
+                document.styleSheets[0].deleteRule(ruleIndex);
+            });
         });
     }])
 

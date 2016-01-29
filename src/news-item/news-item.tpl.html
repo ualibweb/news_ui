@@ -37,10 +37,12 @@
                 <ul rn-carousel rn-carousel-auto-slide rn-carousel-buffered
                     rn-carousel-index="curImage" rn-carousel-locked="isLocked"
                     class="image news-carousel-small">
-                    <li ng-repeat="img in newsItem.images">
+                    <li ng-repeat="img in newsItem.images track by $index">
                         <div class="layer text-center">
                             <div class="news-carousel-image-small"
-                                 ng-style="{'background-image':'url('+img+')'}" ng-click="enlargeImages(true, $index)">
+                                 ng-style="{'background-image':img.styles}"
+                                 ng-class="{portrait: img.isPortrait}"
+                                 ng-click="enlargeImages(true, $index)">
                             </div>
                         </div>
                     </li>
@@ -59,7 +61,7 @@
             <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <ul rn-carousel rn-carousel-controls rn-carousel-index="curEnlImage" class="image">
                 <li ng-repeat="img in newsItem.images">
-                    <div class="layer"><img class="fullsize-img" ng-src="{{img}}" ng-click="nextSlide()"/></div>
+                    <div class="layer"><img class="fullsize-img" ng-src="{{img.src}}" ng-click="nextSlide()"/></div>
                 </li>
             </ul>
             <div class="text-center" rn-carousel-indicators ng-if="newsItem.images.length > 1" slides="newsItem.images" rn-carousel-index="curEnlImage"></div>

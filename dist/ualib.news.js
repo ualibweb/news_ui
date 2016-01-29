@@ -75,10 +75,12 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "                <ul rn-carousel rn-carousel-auto-slide rn-carousel-buffered\n" +
     "                    rn-carousel-index=\"curImage\" rn-carousel-locked=\"isLocked\"\n" +
     "                    class=\"image news-carousel-small\">\n" +
-    "                    <li ng-repeat=\"img in newsItem.images\">\n" +
+    "                    <li ng-repeat=\"img in newsItem.images track by $index\">\n" +
     "                        <div class=\"layer text-center\">\n" +
     "                            <div class=\"news-carousel-image-small\"\n" +
-    "                                 ng-style=\"{'background-image':'url('+img+')'}\" ng-click=\"enlargeImages(true, $index)\">\n" +
+    "                                 ng-style=\"{'background-image':img.styles}\"\n" +
+    "                                 ng-class=\"{portrait: img.isPortrait}\"\n" +
+    "                                 ng-click=\"enlargeImages(true, $index)\">\n" +
     "                            </div>\n" +
     "                        </div>\n" +
     "                    </li>\n" +
@@ -97,7 +99,7 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "            <button type=\"button\" class=\"close\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n" +
     "            <ul rn-carousel rn-carousel-controls rn-carousel-index=\"curEnlImage\" class=\"image\">\n" +
     "                <li ng-repeat=\"img in newsItem.images\">\n" +
-    "                    <div class=\"layer\"><img class=\"fullsize-img\" ng-src=\"{{img}}\" ng-click=\"nextSlide()\"/></div>\n" +
+    "                    <div class=\"layer\"><img class=\"fullsize-img\" ng-src=\"{{img.src}}\" ng-click=\"nextSlide()\"/></div>\n" +
     "                </li>\n" +
     "            </ul>\n" +
     "            <div class=\"text-center\" rn-carousel-indicators ng-if=\"newsItem.images.length > 1\" slides=\"newsItem.images\" rn-carousel-index=\"curEnlImage\"></div>\n" +
@@ -484,11 +486,11 @@ angular.module('ualib.news', [
     }]);;angular.module('ualib.news')
 
     /**
-     * @ngdoc overview
+     * @ngdoc interface
      * @name news.news-item
      *
      * @description
-     * #Route
+     * Route module to display individual news items
      *
      * ```
      * /#/news-exhibits/:news-item
@@ -502,6 +504,15 @@ angular.module('ualib.news', [
             .when('/news-exhibits/:link', {
                 reloadOnSearch: false,
                 resolve: {
+                    /**
+                     * @ngdoc service
+                     * @name news.news-item.newsItem
+                     *
+                     * @requires news.ualibNewsFactory
+                     *
+                     * @description
+                     * A resolve service for {@link news.Route:news-item news-item} route, which is injected into the {@link news.controller:newsItemCtrl}
+                     */
                     newsItem: ['ualibNewsFactory', function(ualibNewsFactory){
                         return ualibNewsFactory.get({news: 'archive'}, function(data){
                             return data;
@@ -521,13 +532,90 @@ angular.module('ualib.news', [
             });
     }])
 
-    .controller('newsItemCtrl', ['$scope', 'newsItem', '$routeParams', '$document', function($scope, newsItem, $routeParams, $document){
+    /**
+     * @ngdoc controller
+     * @name news.news-item.controller:newsItemCtrl
+     *
+     * @requires $scope
+     * @requires $routeParams
+     * @requires $document
+     * @requires ualibNewsFactory
+     *
+     * @description
+     * Route controller when viewing individual news items
+     */
+
+    .controller('newsItemCtrl', ['$scope', 'newsItem', '$routeParams', '$document', '$q', function($scope, newsItem, $routeParams, $document, $q){
         $document.duScrollTo(0, 30, 500, function (t) { return (--t)*t*t+1; });
         $scope.showEnlarged = false;
         $scope.curImage = 0;
         $scope.curEnlImage = 0;
         var controlElms;
+        var cssRules = [];
 
+        function loadImage(src){
+            var deferred = $q.defer();
+            var image = new Image();
+
+            image.onload = function(){
+                image.styles = 'url('+image.src+')';
+                if (image.width < image.height){
+                    image.styles += ',linear-gradient(to right, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.4) 100%),url('+image.src+')';
+                }
+                deferred.resolve(image);
+            };
+
+            image.src = src;
+            return deferred.promise;
+        }
+
+        function loadImages(item, i, len, deferred){
+            i = i ? i :0;
+            len = len ? len : item.images.length;
+            deferred = deferred ? deferred : $q.defer();
+
+            if (len < 1){
+                deferred.resolve(item);
+            }
+
+            var image = new Image();
+
+            image.onload = function(){
+                this.styles = 'url('+this.src+')';
+
+                if (this.width/this.height < 1.35){
+                    var index = document.styleSheets[0].insertRule('.news-carousel-image-small:nth-child('+(i+1)+'):before{ background-image: url('+this.src+'); }');
+                    cssRules.push(index);
+                    //this.styles += ',linear-gradient(to right, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.65) 100%)';
+                    this.isPortrait = true;
+                }
+                item.images[i] = this;
+
+                if (i+1 === len){
+                    deferred.resolve(item);
+                }
+                else {
+                    i++;
+                    loadImages(item, i, len, deferred);
+                }
+            };
+
+            image.src = item.images[i];
+
+            return deferred.promise;
+        }
+
+        /**
+         * @ndgoc method
+         * @name news.news-item.controller:newsItemCtrl.$scope.englargeImages
+         * @methodOf news.controller:newsItemCtrl
+         *
+         * @param {boolean} enlarge `true` or `false` to toggle full screen
+         * @param {number} index Element index of the image clicked - ensures that the image clicked is the one visible when toggling full screen
+         *
+         * @description
+         * `$scope` function used to trigger full-screen carousel when images are attached to a news item.
+         */
         $scope.enlargeImages = function(enlarge, index) {
             if (enlarge) {
                 $scope.showEnlarged = true;
@@ -546,25 +634,84 @@ angular.module('ualib.news', [
             }
         };
 
+        /**
+         * @ndgoc method
+         * @name news.news-item.controller:newsItemCtrl.$scope.setCurEnlImage
+         * @methodOf news.controller:newsItemCtrl
+         *
+         * @param {number} index Element index of the image
+         *
+         * @description
+         * `$scope` function to set the currently viewable image in the carousel.
+         */
+
         $scope.setCurEnlImage = function(index) {
             $scope.curEnlImage = index;
         };
 
        newsItem.$promise.then(function(data){
+           var item = null;
            for (var i = 0, len = data.news.length; i < len; i++){
-               var item = data.news[i];
-               if (item.hasOwnProperty('link') && item.link === $routeParams.link){
-                   $scope.newsItem = item;
+               item = data.news[i];
+               if (item.link && item.link === $routeParams.link){
+                   break;
                }
            }
+
+           loadImages(item).then(function(newsItem){
+               console.log(newsItem);
+               $scope.newsItem = newsItem;
+           });
        });
+
+
 
         $scope.$on('$destroy', function(){
             if (controlElms){
                 controlElms.unbind('click');
             }
+            cssRules.forEach(function(ruleIndex){
+                document.styleSheets[0].deleteRule(ruleIndex);
+            });
         });
     }])
+
+    /**
+     * @ngdoc directive
+     * @name news.news-item.directive:newsCard
+     *
+     * @restrict A
+     * @scope
+     *
+     * @param {object} newsCard The news item JSON object from the API
+     * @param {string=} [newsType=news] Used to load templates for different types of news items
+     *
+     * Supported `news types`:
+     *
+     * | type | template |
+     * |------|----------|
+     * | news | `news-item/news-card.tpl.html` |
+     * | event | `news-item/news-card.tpl.html` |
+     *
+     * @description
+     * Directive to render different types of news items in a condensed list. This is useful for lists of the most current items and not intended for
+     * rendering a list of the whole news archive
+     *
+     * @example
+     *
+     * ```html
+     * <h2>News</h2>
+     * <div ng-repeat="item in news">
+     *      <div news-card="item">
+     * </div>
+     *
+     * <h2>Events</h2>
+     * <div ng-repeat="item in event">
+     *      <div news-card="item" news-type="event">
+     * </div>
+     * ```
+     * 
+     */
 
     .directive('newsCard', [function(){
         return {
@@ -634,7 +781,7 @@ angular.module('ualib.news')
      * @requires news.ualibNewsFactory
      *
      * @description
-     * Controller for the News and Exhibits web app route
+     * Controller for the News and Exhibits web app route {@link $scope}
      *
      */
 
@@ -723,6 +870,34 @@ angular.module('ualib.news')
             }
         }
     }]);;angular.module('ualib.news')
+
+    /**
+     * @ngdoc controller
+     * @name news.controller:NewsTodayCtrl
+     *
+     * @requires $scope
+     * @requires $filter
+     * @requires ualibNewsFactory
+     *
+     * @description
+     * Convenience controller to be used with the {@link news.directive:newsCard newsCard} directive, to display
+     * current `news` and `events`.
+     *
+     * @example
+     * ```html
+     * <div ng-contorller="NewsTodayCtrl">
+     *  <h2>News</h2>
+     *  <div ng-repeat="item in news">
+     *      <div news-card="item">
+     *  </div>
+     *
+     *  <h2>Events</h2>
+     *  <div ng-repeat="item in event">
+     *      <div news-card="item" news-type="event">
+     *  </div>
+     * </div>
+     * ```
+     */
 
     .controller('NewsTodayCtrl', ['$scope', '$filter', 'ualibNewsFactory', function($scope, $filter, ualibNewsFactory){
         ualibNewsFactory.today()
