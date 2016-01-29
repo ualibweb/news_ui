@@ -566,7 +566,7 @@ angular.module('ualib.news', [
             image.onload = function(){
                 this.styles = 'url('+this.src+')';
 
-                if (this.width/this.height < 1.35){
+                if (this.width/this.height < 1.3){
                     this.isPortrait = true;
                 }
                 item.images[i] = this;
