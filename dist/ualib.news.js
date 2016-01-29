@@ -659,7 +659,6 @@ angular.module('ualib.news', [
            }
 
            loadImages(item).then(function(newsItem){
-               console.log(newsItem);
                $scope.newsItem = newsItem;
            });
        });
