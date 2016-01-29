@@ -9,7 +9,7 @@
     width: auto;
     height:275px;
     margin: auto;
-    background-color: #f5f5f5;
+    background-color: #999;
     border: 1px solid #ccc;
 
     &:before {
@@ -54,8 +54,8 @@ div.rn-carousel-indicator span {
   background-size: cover;
 
   &.portrait {
-    background: 50% 25% no-repeat;
-    background-size: 50%;
+    background: no-repeat 50% 25%;
+    background-size: 45%;
     box-shadow: inset 0 0 30px -8px #000;
 
     &:before {
@@ -66,25 +66,12 @@ div.rn-carousel-indicator span {
       display: block;
       position: absolute;
       content: ' ';
-      -webkit-filter: blur(5px) brightness(0.95);
-      background-position: 50% 20%;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-
-    &:after{
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: -1;
-      display: block;
-      position: absolute;
-      content: ' ';
-      -webkit-filter: blur(3px) brightness(0.8);
+      -webkit-filter: blur(5px);
+      filter: blur(5px);
       background-position: 50% 20%;
       background-repeat: repeat-y;
-      background-size: 51%;
-      background-image: linear-gradient(to right, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.65) 100%);
+      background-size: 46%;
+      background-image: linear-gradient(to right, rgba(0,0,0,0.45) 0%,rgba(0,0,0,0.45) 100%);
     }
   }
 }
@@ -142,6 +129,7 @@ div.rn-carousel-indicator span {
 
     &:hover {
       opacity: 1;
+      color: #ffffff;
     }
   }
 
