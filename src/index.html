@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--[if lte IE 6]>            <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en" ng-app="<%= pkg.name %>"> <![endif]-->
+<!--[if IEMobile 7]>          <html class="no-js iem7" lang="en" ng-app="<%= pkg.name %>"> <![endif]-->
+<!--[if (IE 7)&(!IEMobile)]>  <html class="no-js lt-ie9 lt-ie8" lang="en" ng-app="<%= pkg.name %>"> <![endif]-->
+<!--[if IE 8]>                <html class="no-js lt-ie9" lang="en" ng-app="<%= pkg.name %>"> <![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)]><!--> <html class="no-js" lang="en" ng-app="<%= pkg.name %>"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>UA Libraries Styleguide</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="https://rawgit.com/ualibweb/roots-ualib/master/assets/css/main.css">
+    <link rel="stylesheet" href="https://rawgit.com/ualibweb/roots-ualib/master/assets/css/main_bower.css">
+
+    <!-- env:dev -->
+    <link rel="stylesheet" href="<%= pkg.name %>.css">
+    <!-- env:dev:end -->
+
+    <!-- env:prod -->
+    <link rel="stylesheet" href="<%= pkg.name %>.min.css">
+    <!-- env:prod:end -->
+
+    <link href="//raw.githubusercontent.com/revolunet/angular-carousel/master/dist/angular-carousel.css" rel="stylesheet" type="text/css" />
+    <style>
+        .navbar {
+            margin-bottom: 0;
+        }
+
+        .nav .alert {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><%= pkg.name %> demo</a>
+        </div>
+
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/#news-exhibits">News &amp; Exhibits route <span class="sr-only">(current)</span></a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <!-- env:prod -->
+                    <div class="alert alert-danger">
+                        Live Build
+                    </div>
+                    <!-- env:prod:end -->
+                    <!-- env:dev -->
+                    <div class="alert alert-info">
+                        Dev Build
+                    </div>
+                    <!-- env:dev:end -->
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div ng-view></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-warning">
+                The links and directives below are for demo purposes only, and will not appear as part of the app unless specified
+                in a route's template.
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="page-header">
+            <h1>Directive Demos</h1>
+        </div>
+    </div>
+    <div class="row" ng-controller="NewsTodayCtrl">
+        <div class="col-md-6">
+            <h2>News Today</h2>
+            <div class="card-body">
+                <div class="animate-repeat" news-card="item" ng-repeat="item in news">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>Events</h2>
+            <div class="card-body">
+                <div news-card="item" news-type="event" ng-repeat="item in events | limitTo : 3">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- bower:js -->
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/angular-filter/dist/angular-filter.min.js"></script>
+<script src="/bower_components/angular-touch/angular-touch.js"></script>
+<script src="/bower_components/angular-carousel/dist/angular-carousel.js"></script>
+<script src="/bower_components/angular-scroll/angular-scroll.js"></script>
+<script src="/bower_components/angular-route/angular-route.js"></script>
+<script src="/bower_components/angular-resource/angular-resource.js"></script>
+<script src="/bower_components/angular-animate/angular-animate.js"></script>
+<script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="/bower_components/ualib-ui/dist/ualib-ui.js"></script>
+<!-- endbower -->
+
+<!-- env:dev -->
+<script src="<%= pkg.name %>.js"></script>
+<!-- env:dev:end -->
+
+<!-- env:prod -->
+<script src="<%= pkg.name %>.min.js"></script>
+<!-- env:prod:end -->
+</body>
+</html>
