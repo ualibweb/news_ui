@@ -64,7 +64,7 @@ angular.module('ualib.news')
         $document.duScrollTo(0, 30, 500, function (t) { return (--t)*t*t+1; });
         $scope.showEnlarged = false;
         $scope.curImage = 0;
-        $scope.curEnlImage = 0;
+
         var controlElms;
 
         function loadImages(item, i, len, deferred){
@@ -218,4 +218,16 @@ angular.module('ualib.news')
                 return 'news-item/' + type + '-card.tpl.html';
             }
         };
-    }]);
+    }])
+
+    .filter('breadcrumbTruncate', function () {
+        return function(x){
+            pageArray = x.split(' ');
+
+            if (pageArray.length > 4) {
+                newPageArray = pageArray.slice(0, 4);
+                x = newPageArray.join(' ') + '...';
+            }
+            return x;
+        };
+    });

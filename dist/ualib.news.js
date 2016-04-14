@@ -40,6 +40,18 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "    <div class=\"jumbotron\">\n" +
     "        <div class=\"container\">\n" +
     "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-12\">\n" +
+    "                    <ol class=\"breadcrumb\" typeof=\"BreadcrumbList\" vocab=\"http://schema.org/\">\n" +
+    "                        <li><a title=\"Go to The University of Alabama Libraries.\" href=\"/\" class=\"home\">The University of Alabama Libraries</a></li>\n" +
+    "                        <li><a title=\"Go to News.\" href=\"/#/news-exhibits\" class=\"post post-page\">News</a></li>\n" +
+    "                        <li><a title=\"Go to News.\" href=\"\" class=\"post post-page\">{{newsItem.title | breadcrumbTruncate}}</a></li>\n" +
+    "                        <script>\n" +
+    "                            console.log(\"TEST!!\")\n" +
+    "                        </script>\n" +
+    "                    </ol>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <div class=\"row\">\n" +
     "                <div class=\"col-sm-7\">\n" +
     "                    <h1>News &amp; Exhibits</h1>\n" +
     "                </div>\n" +
@@ -137,6 +149,14 @@ angular.module("news/news-list.tpl.html", []).run(["$templateCache", function($t
     "<div class=\"jumbotron-header\">\n" +
     "    <div class=\"jumbotron\">\n" +
     "        <div class=\"container\">\n" +
+    "            <div class=\"row\">\n" +
+    "                <div class=\"col-sm-12\">\n" +
+    "                    <ol class=\"breadcrumb\" typeof=\"BreadcrumbList\" vocab=\"http://schema.org/\">\n" +
+    "                        <li><a title=\"Go to The University of Alabama Libraries.\" href=\"/\" class=\"home\">The University of Alabama Libraries</a></li>\n" +
+    "                        <li><a title=\"Go to News.\" href=\"/#/news-exhibits\" class=\"post post-page\">News</a></li>\n" +
+    "                    </ol>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
     "            <div class=\"row\">\n" +
     "                <div class=\"col-sm-7\">\n" +
     "                    <h1>News &amp; Exhibits</h1>\n" +
@@ -549,7 +569,7 @@ angular.module('ualib.news', [
         $document.duScrollTo(0, 30, 500, function (t) { return (--t)*t*t+1; });
         $scope.showEnlarged = false;
         $scope.curImage = 0;
-        $scope.curEnlImage = 0;
+
         var controlElms;
 
         function loadImages(item, i, len, deferred){
@@ -703,7 +723,19 @@ angular.module('ualib.news', [
                 return 'news-item/' + type + '-card.tpl.html';
             }
         };
-    }]);;/**
+    }])
+
+    .filter('breadcrumbTruncate', function () {
+        return function(x){
+            pageArray = x.split(' ');
+
+            if (pageArray.length > 4) {
+                newPageArray = pageArray.slice(0, 4);
+                x = newPageArray.join(' ') + '...';
+            }
+            return x;
+        };
+    });;/**
  * @ngdoc overview
  * @name news
  * 
