@@ -44,7 +44,7 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "                    <ol class=\"breadcrumb\" typeof=\"BreadcrumbList\" vocab=\"http://schema.org/\">\n" +
     "                        <li><a title=\"Go to The University of Alabama Libraries.\" href=\"/#/home\" class=\"home\">The University of Alabama Libraries</a></li>\n" +
     "                        <li><a title=\"Go to News.\" href=\"/#/news-exhibits\" class=\"post post-page\">News</a></li>\n" +
-    "                        <li><a title=\"Go to news article.\" href=\"\" class=\"post post-page\">{{newsItem.title | breadcrumbTruncate}}</a></li>\n" +
+    "                        <li><a title=\"Go to news article.\" href=\"\" class=\"post post-page\">{{newsItem.title | truncate: 30: '...': true}}</a></li>\n" +
     "                    </ol>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -720,19 +720,7 @@ angular.module('ualib.news', [
                 return 'news-item/' + type + '-card.tpl.html';
             }
         };
-    }])
-
-    .filter('breadcrumbTruncate', function () {
-        return function(x){
-            pageArray = x.split(' ');
-
-            if (pageArray.length > 4) {
-                newPageArray = pageArray.slice(0, 4);
-                x = newPageArray.join(' ') + '...';
-            }
-            return x;
-        };
-    });;/**
+    }]);;/**
  * @ngdoc overview
  * @name news
  * 

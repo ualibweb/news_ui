@@ -6,7 +6,7 @@
                     <ol class="breadcrumb" typeof="BreadcrumbList" vocab="http://schema.org/">
                         <li><a title="Go to The University of Alabama Libraries." href="/#/home" class="home">The University of Alabama Libraries</a></li>
                         <li><a title="Go to News." href="/#/news-exhibits" class="post post-page">News</a></li>
-                        <li><a title="Go to news article." href="" class="post post-page">{{newsItem.title | breadcrumbTruncate}}</a></li>
+                        <li><a title="Go to news article." href="" class="post post-page">{{newsItem.title | truncate: 30: '...': true}}</a></li>
                     </ol>
                 </div>
             </div>

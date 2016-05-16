@@ -218,16 +218,4 @@ angular.module('ualib.news')
                 return 'news-item/' + type + '-card.tpl.html';
             }
         };
-    }])
-
-    .filter('breadcrumbTruncate', function () {
-        return function(x){
-            pageArray = x.split(' ');
-
-            if (pageArray.length > 4) {
-                newPageArray = pageArray.slice(0, 4);
-                x = newPageArray.join(' ') + '...';
-            }
-            return x;
-        };
-    });
+    }]);
