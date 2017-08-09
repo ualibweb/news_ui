@@ -55,7 +55,7 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "                <div class=\"col-sm-5\">\n" +
     "                    <div class=\"well\">\n" +
     "                        <p class=\"lead\">Looking for upcoming events in the University Libraries?</p>\n" +
-    "                        <a href=\"http://events.ua.edu/category/22/\" class=\"btn btn-primary\" target=\"_new\">View event calendar <span class=\"fa fa-external-link\"></span></a>\n" +
+    "                        <a href=\"https://www.ua.edu/events/category/22/view/month/\" class=\"btn btn-primary\" target=\"_new\">View event calendar <span class=\"fa fa-external-link\"></span></a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
