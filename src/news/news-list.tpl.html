@@ -33,21 +33,21 @@
                                                                   | filter:newsFilters.search
                                                                   | orderBy:['-sticky','-created']">
                 <div class="media-left hidden-sm hidden-xs">
-                    <a ng-href="#/news-exhibits/{{item.link}}" class="news-list-tb" ng-class="{img: item.tb}">
+                    <span class="news-list-tb" ng-class="{img: item.tb}">
                         <img class="media-object" ng-src="{{item.tb}}" ng-if="item.tb" />
                         <span class="media-object"
                           ng-if="item.type == 0 && !item.tb"><span class="fa fa-newspaper-o"></span></span>
                         <span class="media-object"
                           ng-if="item.type == 1 && !item.tb"><span class="fa fa-calendar"></span></span>
-                    </a>
+                    </span>
                 </div>
                 <div class="media-body">
-                    <h3 class="media-heading">
+                    <h2 class="h3 media-heading">
                         <a ng-href="#/news-exhibits/{{item.link}}" ng-bind-html="item.title | highlight:newsFilters.search"></a>
-                    </h3>
+                    </h2>
 
-                    <h5 class="text-muted" ng-if="item.type > 0">Exhibit {{item.activeFrom | date:mediumDate}} - {{item.activeUntil | date:mediumDate}}</h5>
-                    <h5 class="text-muted" ng-if="item.type < 1">Created on {{item.created | date:mediumDate}}</h5>
+                    <h3 class="h5 text-muted" ng-if="item.type > 0">Exhibit {{item.activeFrom | date:mediumDate}} - {{item.activeUntil | date:mediumDate}}</h5>
+                    <h3 class="h5 text-muted" ng-if="item.type < 1">Created on {{item.created | date:mediumDate}}</h5>
                     <p class="text-justify">
                     <span ng-bind-html="item.blurb | highlight:newsFilters.search">
                     </span>
@@ -60,13 +60,13 @@
             </div>
 
             <div class="alert alert-warning text-center" role="alert" ng-show="news.length < 1">
-                <h2>
+                <span class="h2">
                     No
                     <span ng-show="newsFilters.type == ''">News or Exhibits</span>
                     <span ng-show="newsFilters.type == '0'">News</span>
                     <span ng-show="newsFilters.type == '1'">Exhibits</span>
                     match the search "<strong>{{newsFilters.search}}</strong>"</span>
-                </h2>
+                </span>
             </div>
         </div>
 

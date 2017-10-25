@@ -178,21 +178,21 @@ angular.module("news/news-list.tpl.html", []).run(["$templateCache", function($t
     "                                                                  | filter:newsFilters.search\n" +
     "                                                                  | orderBy:['-sticky','-created']\">\n" +
     "                <div class=\"media-left hidden-sm hidden-xs\">\n" +
-    "                    <a ng-href=\"#/news-exhibits/{{item.link}}\" class=\"news-list-tb\" ng-class=\"{img: item.tb}\">\n" +
+    "                    <span class=\"news-list-tb\" ng-class=\"{img: item.tb}\">\n" +
     "                        <img class=\"media-object\" ng-src=\"{{item.tb}}\" ng-if=\"item.tb\" />\n" +
     "                        <span class=\"media-object\"\n" +
     "                          ng-if=\"item.type == 0 && !item.tb\"><span class=\"fa fa-newspaper-o\"></span></span>\n" +
     "                        <span class=\"media-object\"\n" +
     "                          ng-if=\"item.type == 1 && !item.tb\"><span class=\"fa fa-calendar\"></span></span>\n" +
-    "                    </a>\n" +
+    "                    </span>\n" +
     "                </div>\n" +
     "                <div class=\"media-body\">\n" +
-    "                    <h3 class=\"media-heading\">\n" +
+    "                    <h2 class=\"h3 media-heading\">\n" +
     "                        <a ng-href=\"#/news-exhibits/{{item.link}}\" ng-bind-html=\"item.title | highlight:newsFilters.search\"></a>\n" +
-    "                    </h3>\n" +
+    "                    </h2>\n" +
     "\n" +
-    "                    <h5 class=\"text-muted\" ng-if=\"item.type > 0\">Exhibit {{item.activeFrom | date:mediumDate}} - {{item.activeUntil | date:mediumDate}}</h5>\n" +
-    "                    <h5 class=\"text-muted\" ng-if=\"item.type < 1\">Created on {{item.created | date:mediumDate}}</h5>\n" +
+    "                    <h3 class=\"h5 text-muted\" ng-if=\"item.type > 0\">Exhibit {{item.activeFrom | date:mediumDate}} - {{item.activeUntil | date:mediumDate}}</h5>\n" +
+    "                    <h3 class=\"h5 text-muted\" ng-if=\"item.type < 1\">Created on {{item.created | date:mediumDate}}</h5>\n" +
     "                    <p class=\"text-justify\">\n" +
     "                    <span ng-bind-html=\"item.blurb | highlight:newsFilters.search\">\n" +
     "                    </span>\n" +
@@ -205,13 +205,13 @@ angular.module("news/news-list.tpl.html", []).run(["$templateCache", function($t
     "            </div>\n" +
     "\n" +
     "            <div class=\"alert alert-warning text-center\" role=\"alert\" ng-show=\"news.length < 1\">\n" +
-    "                <h2>\n" +
+    "                <span class=\"h2\">\n" +
     "                    No\n" +
     "                    <span ng-show=\"newsFilters.type == ''\">News or Exhibits</span>\n" +
     "                    <span ng-show=\"newsFilters.type == '0'\">News</span>\n" +
     "                    <span ng-show=\"newsFilters.type == '1'\">Exhibits</span>\n" +
     "                    match the search \"<strong>{{newsFilters.search}}</strong>\"</span>\n" +
-    "                </h2>\n" +
+    "                </span>\n" +
     "            </div>\n" +
     "        </div>\n" +
     "\n" +
