@@ -27,7 +27,16 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-3 col-md-push-9 hidden-xs">
+            <h2 class="h4">Filters</h2>
+            <form class="facets-form">
+                <div class="form-group">
+                    <h3 class="h5" id="filterNews">Search news and events</h3>
+                    <input type="text" aria-labelledby="filterNews" class="form-control" ng-model="newsFilters.search" placeholder="Keyword search">
+                </div>
+            </form>
+        </div>
+        <div class="col-md-9 col-md-pull-3">
 
             <div class="media animate-repeat" ng-repeat="item in news | filter:{type: newsFilters.type}
                                                                   | filter:newsFilters.search
@@ -70,14 +79,7 @@
             </div>
         </div>
 
-        <div class="col-md-3 hidden-xs">
-            <h4>Filters</h4>
-            <form class="facets-form">
-                <div class="form-group">
-                    <input type="text" class="form-control" ng-model="newsFilters.search" placeholder="Keyword search">
-                </div>
-            </form>
-        </div>
+
 
     </div>
 </div>
