@@ -1,8 +1,8 @@
 <a ng-href="#/news-exhibits/{{newsCard.link}}" class="media news-card">
     <div class="media-body">
-        <h2 class="h4 media-heading">
+        <h3 class="h4 media-heading">
             <span ng-bind-html="newsCard.title | truncate:50:'...':true"></span>
-        </h2>
+        </h3>
         <div class="details-context" ng-if="(newsCard.activeFrom != newsCard.activeUntil && newsCard.type != 0)">
             {{newsCard.activeFrom | date:mediumDate}} - {{newsCard.activeUntil | date:mediumDate}}
         </div>
