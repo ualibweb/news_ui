@@ -19,8 +19,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular-filter": "~0.5.5",
-    "angular-carousel": "https://github.com/ualibweb/angular-carousel.git#master",
+    "angular-filter": "=0.5.5",
+    "angular-carousel": "https://github.com/ualibweb/angular-carousel.git#accessibility",
     "angular-scroll": "~1.0.0"
   },
   "devDependencies": {
