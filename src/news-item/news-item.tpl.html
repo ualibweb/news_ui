@@ -48,14 +48,17 @@
                     class="image news-carousel-small">
                     <li ng-repeat="img in newsItem.images track by $index">
                         <div class="layer text-center">
-                            <div class="news-carousel-image-small"
+                            <div id="newsImage" class="news-carousel-image-small"
                                  ng-style="{'background-image':img.styles}"
                                  ng-class="{portrait: img.isPortrait}"
                                  ng-click="enlargeImages(true, $index)">
                             </div>
+
                         </div>
+
                     </li>
                 </ul>
+                <label for="newsImage">{{newsItem.altText}}</label>
                 <div rn-carousel-indicators ng-if="newsItem.images.length > 1" slides="newsItem.images" rn-carousel-index="curImage">
                 </div>
             </div>

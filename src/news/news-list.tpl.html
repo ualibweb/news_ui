@@ -43,7 +43,7 @@
                                                                   | orderBy:['-sticky','-created']">
                 <div class="media-left hidden-sm hidden-xs">
                     <span class="news-list-tb" ng-class="{img: item.tb}">
-                        <img class="media-object" ng-src="{{item.tb}}" ng-if="item.tb" />
+                        <img class="media-object" ng-src="{{item.tb}}" alt={{item.altText}} ng-if="item.tb" />
                         <span class="media-object"
                           ng-if="item.type == 0 && !item.tb"><span class="fa fa-newspaper-o"></span></span>
                         <span class="media-object"
