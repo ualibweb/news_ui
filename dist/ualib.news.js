@@ -81,23 +81,8 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "        </div>\n" +
     "        <div class=\"col-md-8 col-md-pull-4\">\n" +
     "            <div class=\"text-center news-carousel-container-small\" ng-if=\"newsItem.images.length > 0\">\n" +
-    "                <ul rn-carousel rn-carousel-auto-slide rn-carousel-buffered\n" +
-    "                    rn-carousel-index=\"curImage\" rn-carousel-locked=\"isLocked\"\n" +
-    "                    class=\"image news-carousel-small\">\n" +
-    "                    <li ng-repeat=\"img in newsItem.images track by $index\">\n" +
-    "                        <div class=\"layer text-center\">\n" +
-    "                            <div id=\"newsImage\" class=\"news-carousel-image-small\"\n" +
-    "                                 ng-style=\"{'background-image':img.styles}\"\n" +
-    "                                 ng-class=\"{portrait: img.isPortrait}\"\n" +
-    "                                 ng-click=\"enlargeImages(true, $index)\">\n" +
-    "                            </div>\n" +
-    "\n" +
-    "                        </div>\n" +
-    "\n" +
-    "                    </li>\n" +
-    "                </ul>\n" +
-    "                <label for=\"newsImage\">{{newsItem.altText}}</label>\n" +
-    "                <div rn-carousel-indicators ng-if=\"newsItem.images.length > 1\" slides=\"newsItem.images\" rn-carousel-index=\"curImage\">\n" +
+    "                <div class=\"layer text-center image-holder\" ng-repeat=\"img in newsItem.images track by $index\">\n" +
+    "                    <img class=\"news-image\" ng-src=\"{{img.src}}\" ng-click=\"enlargeImages(true, $index)\" alt=\"{{newsItem.altText}}\"/>\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <h5 class=\"text-muted\">\n" +

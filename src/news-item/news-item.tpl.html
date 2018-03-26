@@ -43,23 +43,8 @@
         </div>
         <div class="col-md-8 col-md-pull-4">
             <div class="text-center news-carousel-container-small" ng-if="newsItem.images.length > 0">
-                <ul rn-carousel rn-carousel-auto-slide rn-carousel-buffered
-                    rn-carousel-index="curImage" rn-carousel-locked="isLocked"
-                    class="image news-carousel-small">
-                    <li ng-repeat="img in newsItem.images track by $index">
-                        <div class="layer text-center">
-                            <div id="newsImage" class="news-carousel-image-small"
-                                 ng-style="{'background-image':img.styles}"
-                                 ng-class="{portrait: img.isPortrait}"
-                                 ng-click="enlargeImages(true, $index)">
-                            </div>
-
-                        </div>
-
-                    </li>
-                </ul>
-                <label for="newsImage">{{newsItem.altText}}</label>
-                <div rn-carousel-indicators ng-if="newsItem.images.length > 1" slides="newsItem.images" rn-carousel-index="curImage">
+                <div class="layer text-center image-holder" ng-repeat="img in newsItem.images track by $index">
+                    <img class="news-image" ng-src="{{img.src}}" ng-click="enlargeImages(true, $index)" alt="{{newsItem.altText}}"/>
                 </div>
             </div>
             <h5 class="text-muted">
