@@ -18,7 +18,7 @@
 /*# sourceMappingURL=dist/ualib.news.css.map */
 .news-carousel-container-small .news-image {
   border: 1px solid #ccc;
-  border-top: Opx;
+  border-top-width: 0;
   /*Keeps "View Fuil Image" in alignment w/ top edge*/
   margin: auto;
   max-height: 500px;
