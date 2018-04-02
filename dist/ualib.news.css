@@ -28,6 +28,7 @@
 .news-carousel-container-small .image-holder:before {
   content: 'View Full Image';
   margin: auto;
+  margin-top: 10px;
   width: 400px;
   position: absolute;
   z-index: 2000;
