@@ -44,7 +44,8 @@
         <div class="col-md-8 col-md-pull-4">
             <div class="text-center news-carousel-container-small" ng-if="newsItem.images.length > 0">
                 <div class="layer text-center image-holder" ng-repeat="img in newsItem.images track by $index">
-                    <img class="news-image" ng-src="{{img.src}}" ng-click="enlargeImages(true, $index)" alt="{{newsItem.altText}}"/>
+                    <img class="news-image" ng-src="{{img.src}}" ng-click="enlargeImages(true, $index)" ng-if="newsItem.altText != null" ng-attr-alt="{{newsItem.altText}}" />
+                    <img class="news-image" ng-src="{{img.src}}" ng-click="enlargeImages(true, $index)" ng-if="newsItem.altText == null" />
                 </div>
             </div>
             <h5 class="text-muted">

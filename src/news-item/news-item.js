@@ -155,8 +155,18 @@ angular.module('ualib.news')
                }
            }
 
+
+
            loadImages(item).then(function(newsItem){
                $scope.newsItem = newsItem;
+
+               if ($scope.newsItem.altText === ''){
+                   console.log("Alt text empty!");
+                   console.log($scope.newsItem);
+               }
+               else {
+                   console.log($scope.newsItem);
+               }
            });
        });
 
