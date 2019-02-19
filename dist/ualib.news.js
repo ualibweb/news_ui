@@ -1,6 +1,6 @@
 angular.module('ualib.news.templates', ['news-item/event-card.tpl.html', 'news-item/news-card.tpl.html', 'news-item/news-item.tpl.html', 'news/news-list.tpl.html', 'today/news-today.tpl.html']);
 
-angular.module("news-item/event-card.tpl.html", []).run(["$templateCache", function($templateCache) {
+angular.module("news-item/event-card.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("news-item/event-card.tpl.html",
     "<a ng-href=\"{{newsCard.link}}\" target=\"_new\" class=\"media news-card\">\n" +
     "    <div class=\"media-left\">\n" +
@@ -16,7 +16,7 @@ angular.module("news-item/event-card.tpl.html", []).run(["$templateCache", funct
     "</a>");
 }]);
 
-angular.module("news-item/news-card.tpl.html", []).run(["$templateCache", function($templateCache) {
+angular.module("news-item/news-card.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("news-item/news-card.tpl.html",
     "<a ng-href=\"#/news-exhibits/{{newsCard.link}}\" class=\"media news-card\">\n" +
     "    <div class=\"media-body\">\n" +
@@ -34,7 +34,7 @@ angular.module("news-item/news-card.tpl.html", []).run(["$templateCache", functi
     "</a>");
 }]);
 
-angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", function($templateCache) {
+angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("news-item/news-item.tpl.html",
     "<div class=\"jumbotron-header\">\n" +
     "    <div class=\"jumbotron\">\n" +
@@ -70,7 +70,7 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-4 col-md-push-8\">\n" +
     "            <div class=\"well\" ng-if=\"newsItem.contactName\">\n" +
-    "                <h4>For more information contact</h4>\n" +
+    "                <h3 class=\"h4\">For more information contact</h3>\n" +
     "                <ul class=\"fa-ul\">\n" +
     "                    <li><span class=\"fa fa-user fa-li\"></span>{{newsItem.contactName}}</li>\n" +
     "                    <li><span class=\"fa fa-phone fa-li\"></span>{{newsItem.contactPhone}}</li>\n" +
@@ -96,7 +96,7 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "");
 }]);
 
-angular.module("news/news-list.tpl.html", []).run(["$templateCache", function($templateCache) {
+angular.module("news/news-list.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("news/news-list.tpl.html",
     "<div class=\"jumbotron-header\">\n" +
     "    <div class=\"jumbotron\">\n" +
@@ -185,7 +185,7 @@ angular.module("news/news-list.tpl.html", []).run(["$templateCache", function($t
     "</div>");
 }]);
 
-angular.module("today/news-today.tpl.html", []).run(["$templateCache", function($templateCache) {
+angular.module("today/news-today.tpl.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("today/news-today.tpl.html",
     "<div class=\"row\" ng-controller=\"NewsTodayCtrl\">\n" +
     "\n" +
