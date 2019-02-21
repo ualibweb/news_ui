@@ -20,12 +20,13 @@ angular.module('ualib.news')
 
                 // Convert timestamps into JS millisecond standard
                 if (item.activeFrom !== null) {
-                    n.activeFrom = new Date(item.activeFrom * 1000);
+                    n.activeFrom = new Date(correctEventTime(item.activeFrom));
+                    console.log(n.activeFrom);
                 } else {
                     n.activeFrom = null;
                 }
                 if (item.activeUntil !== null) {
-                    n.activeUntil = new Date(item.activeUntil * 1000);
+                    n.activeUntil = new Date(correctEventTime(item.activeUntil));
                 } else {
                     n.activeUntil = null;
                 }
@@ -53,7 +54,7 @@ angular.module('ualib.news')
 
         //TODO: centralize this function so it can be used with all apps
         // Extend the default responseTransform array - Straight from Angular 1.2.8 API docs - https://docs.angularjs.org/api/ng/service/$http#overriding-the-default-transformations-per-request
-        
+
         /**
          * @ngdoc function
          * @name news.ualibNewsFactory#appendTransform
