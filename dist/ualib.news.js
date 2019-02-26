@@ -56,7 +56,7 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "                <div class=\"col-sm-5\">\n" +
     "                    <div class=\"well\">\n" +
     "                        <p class=\"lead\">Looking for upcoming events in the University Libraries?</p>\n" +
-    "                        <a href=\"https://www.ua.edu/events/category/22/view/month/\" class=\"btn btn-primary\" target=\"_new\">View event calendar <span class=\"fa fa-external-link\"></span></a>\n" +
+    "                        <a href=\"https://www.ua.edu/events/category/22/view/month/\" class=\"btn btn-primary btn-primary-dark\" target=\"_new\">View event calendar <span class=\"fa fa-external-link\"></span></a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -71,7 +71,7 @@ angular.module("news-item/news-item.tpl.html", []).run(["$templateCache", functi
     "    <div class=\"row\">\n" +
     "        <div class=\"col-md-4 col-md-push-8\">\n" +
     "            <div class=\"well\" ng-if=\"newsItem.contactName\">\n" +
-    "                <h4>For more information contact</h4>\n" +
+    "                <h3 class=\"h4\">For more information contact</h3>\n" +
     "                <ul class=\"fa-ul\">\n" +
     "                    <li><span class=\"fa fa-user fa-li\"></span>{{newsItem.contactName}}</li>\n" +
     "                    <li><span class=\"fa fa-phone fa-li\"></span>{{newsItem.contactPhone}}</li>\n" +
@@ -117,7 +117,7 @@ angular.module("news/news-list.tpl.html", []).run(["$templateCache", function ($
     "                <div class=\"col-sm-5\">\n" +
     "                    <div class=\"well\">\n" +
     "                        <p class=\"lead\">Looking for upcoming events in the University Libraries?</p>\n" +
-    "                        <a href=\"https://www.ua.edu/events/category/22/view/month/\" class=\"btn btn-primary\" target=\"_new\">View event calendar <span class=\"fa fa-external-link\"></span></a>\n" +
+    "                        <a href=\"https://www.ua.edu/events/category/22/view/month/\" class=\"btn btn-primary btn-primary-dark\" target=\"_new\">View event calendar <span class=\"fa fa-external-link\"></span></a>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
