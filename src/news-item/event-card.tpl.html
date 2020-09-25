@@ -1,12 +1,12 @@
-<a ng-href="{{newsCard.link}}" target="_new" class="media news-card">
+<a ng-href="{{newsCard.event.url}}" target="_new" class="media news-card">
     <div class="media-left">
         <div class="cal-icon">
-            <div class="cal-month">{{newsCard.activeFrom | date:'MMM'}}</div>
-            <div class="cal-day">{{newsCard.activeFrom | date:'d'}}</div>
+            <div class="cal-month">{{newsCard.event.first_date | date:'MMM'}}</div>
+            <div class="cal-day">{{newsCard.event.first_date | date:'d'}}</div>
         </div>
     </div>
     <div class="media-body">
-        <h3 class="h4 media-heading" ng-bind-html="newsCard.title | truncate:50:'...':true"></h3>
-        <p ng-bind-html="newsCard.blurb | truncate:150:'...':true"></p>
+        <h3 class="h4 media-heading" ng-bind-html="newsCard.event.title | truncate:50:'...':true"></h3>
+        <p ng-bind-html="newsCard.event.description_text | truncate:150:'...':true"></p>
     </div>
 </a>

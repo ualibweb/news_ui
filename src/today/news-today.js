@@ -7,6 +7,7 @@ angular.module('ualib.news')
      * @requires $scope
      * @requires $filter
      * @requires ualibNewsFactory
+     * @requires ualibEventFactory
      *
      * @description
      * Convenience controller to be used with the {@link news.directive:newsCard newsCard} directive, to display
@@ -28,12 +29,14 @@ angular.module('ualib.news')
      * ```
      */
 
-    .controller('NewsTodayCtrl', ['$scope', '$filter', 'ualibNewsFactory', function($scope, $filter, ualibNewsFactory){
-        ualibNewsFactory.today()
-            .$promise
-            .then(function(data){
-                $scope.news = data.news;
-                $scope.events = data.events;
-                $scope.newsOverflow = (data.news.length + data.events.length) > 3;
-            });
+    .controller('NewsTodayCtrl', ['$scope', '$filter', 'ualibNewsFactory', 'ualibEventFactory', function($scope, $filter, ualibNewsFactory, ualibEventFactory){
+        Promise.all([
+            ualibNewsFactory.today()
+                .$promise
+                .then(data => $scope.news = data.news),
+            ualibEventFactory.today()
+                .$promise
+                .then(events => $scope.events = events),
+        ])
+            .then(() => $scope.newsOverflow = ($scope.news.length + $scope.events.length) > 3);
     }]);
