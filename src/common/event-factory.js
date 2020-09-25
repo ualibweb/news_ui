@@ -1,6 +1,8 @@
 angular.module('ualib.news')
-	.factory('ualibEventFactory', ['$resource', $resource => {
-		const transformResponse = response => JSON.parse(response).events;
+	.factory('ualibEventFactory', ['$resource', function($resource) {
+		function transformResponse(response) {
+			return JSON.parse(response).events;
+		}
 
 		return $resource('https://calendar.ua.edu/api/2/events', {
 			days: 365,
@@ -11,7 +13,7 @@ angular.module('ualib.news')
 				method: 'GET',
 				params: { pp: 4 },
 				isArray: true,
-				transformResponse,
+				transformResponse: transformResponse,
 				cache: true,
 			},
 		});

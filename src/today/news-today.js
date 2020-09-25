@@ -33,10 +33,16 @@ angular.module('ualib.news')
         Promise.all([
             ualibNewsFactory.today()
                 .$promise
-                .then(data => $scope.news = data.news),
+                .then(function(data) {
+                    $scope.news = data.news;
+                }),
             ualibEventFactory.today()
                 .$promise
-                .then(events => $scope.events = events),
+                .then(function(events) {
+                    $scope.events = events;
+                }),
         ])
-            .then(() => $scope.newsOverflow = ($scope.news.length + $scope.events.length) > 3);
+            .then(function() {
+                $scope.newsOverflow = ($scope.news.length + $scope.events.length) > 3;
+            });
     }]);
